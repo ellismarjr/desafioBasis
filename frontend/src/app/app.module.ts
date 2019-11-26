@@ -9,11 +9,17 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FuncionariosModule } from './funcionarios/funcionarios.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { EmpresasComponent } from './empresas/empresas.component';
+import { CadEmpresasComponent } from './empresas/cad-empresas/cad-empresas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    DashboardComponent,
+    EmpresasComponent,
+    CadEmpresasComponent,
   ],
   imports: [
     BrowserModule,
