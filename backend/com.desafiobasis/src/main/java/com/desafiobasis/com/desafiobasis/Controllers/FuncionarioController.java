@@ -18,36 +18,42 @@ public class FuncionarioController {
 
     @Autowired
     FuncionarioRepository funcionarioRepository;
+
+    @Autowired
     EmpresaRepository empresaRepository;
 
     @GetMapping("/funcionarios")
-    public List<Funcionario> listaFuncionarios() {
+    public List<Funcionario> find() {
         return funcionarioRepository.findAll();
     }
 
     @GetMapping("/funcionarios/{id}")
     @ResponseBody
-    public Funcionario listaFuncionarios(@PathVariable(value = "id" ) long id) {
+    public Funcionario show(@PathVariable(value = "id" ) long id) {
         Funcionario funcionario = funcionarioRepository.findById(id);
         return funcionario;
     }
 
     @PostMapping("/funcionarios")
-    public Funcionario salvaFuncionario(@RequestBody Map<String, String> body, Funcionario funcionario) {
+    public Funcionario create(@RequestBody Map<String, String> body, Funcionario funcionario, Empresa empresa) {
+        funcionario.setNome(body.get("nome"));
+        funcionario.setDataNascimento(body.get("dataNascimento"));
+        funcionario.setCpf(body.get("cpf"));
 
-        System.out.println("---->>>" + body.get("empresa_id"));
-//        Empresa empresa = empresaRepository.findById(empresaId);
-//        funcionario.setEmpresa(empresa);
+        long empresaId = Long.parseLong(body.get("empresa_id"));
+        empresa = empresaRepository.findById(empresaId);
+        funcionario.setEmpresa(empresa);
+
         return funcionarioRepository.save(funcionario);
     }
 
     @PutMapping("/funcionarios")
-    public Funcionario atualizaFuncionario(@RequestBody Funcionario funcionario) {
+    public Funcionario update(@RequestBody Funcionario funcionario) {
         return funcionarioRepository.save(funcionario);
     }
 
     @DeleteMapping("/funcionarios/{id}")
-    public void excluirFuncionario(@PathVariable(value = "id") long id) {
+    public void destroy(@PathVariable(value = "id") long id) {
         funcionarioRepository.deleteById(id);
     }
 }

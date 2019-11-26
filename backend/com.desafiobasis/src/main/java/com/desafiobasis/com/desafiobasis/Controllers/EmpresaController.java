@@ -17,31 +17,31 @@ public class EmpresaController {
     EmpresaRepository empresaRepository;
 
     @GetMapping("/empresas")
-    public List<Empresa> listaEmpresas() {
+    public List<Empresa> find() {
         return empresaRepository.findAll();
     }
 
     @GetMapping("/empresas/{id}")
     @ResponseBody
-    public Empresa listaEmpresa(@PathVariable(value = "id" ) long id) {
+    public Empresa show(@PathVariable(value = "id" ) long id) {
         Empresa empresa = empresaRepository.findById(id);
 
         return empresa;
     }
 
     @PostMapping("/empresas")
-    public Empresa salvaEmpresa(@RequestBody Empresa empresa) {
+    public Empresa create(@RequestBody Empresa empresa) {
         return empresaRepository.save(empresa);
     }
 
     @PutMapping("/empresas")
-    public Empresa atualizaEmpresa(@RequestBody Empresa empresa) {
+    public Empresa update(@RequestBody Empresa empresa) {
         empresaRepository.save(empresa);
         return empresa;
     }
 
     @DeleteMapping("/empresas/{id}")
-    public void excluirEmpresa(@PathVariable(value = "id") long id) {
+    public void destroy(@PathVariable(value = "id") long id) {
         empresaRepository.deleteById(id);
     }
 
