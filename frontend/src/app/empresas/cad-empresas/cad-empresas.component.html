@@ -1,40 +1,60 @@
-<div class="container">
+<form class="needs-validation" novalidate [formGroup]="form">
+  <div class="form-row">
+    <div class="col-md-4 mb-1">
 
-  <form>
-    <div class="form-row">
-      <div class="form-group col-md-2">
-
+    </div>
+    <div class="col-md-4 mb-1">
+      <div class="alert alert-primary" role="alert">
+        Cadastro de Empresas
       </div>
-
-      <div class="form-group col-md-6">
-        <div class="alert alert-primary" role="alert">
-          Cadastro de Empresas
-        </div>
-
-        <div class="form-group">
-          <input type="text" class="form-control" id="inputName4" placeholder="Nome">
-        </div>
-
-        <div class="form-group">
-          <input type="text" class="form-control" id="inputEndereco4" placeholder="Endereço">
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" id="inputCnpj4" placeholder="CNPJ">
-        </div>
-
-
-
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary mb-2">Salvar</button>
-
-        </div>
+      <input type="text" class="form-control" id="nome" formControlName="nome" placeholder="Nome da empresa"
+        [ngClass]="{'is-invalid': submitted && hasError('nome')}">
+      <div class="invalid-feedback" *ngIf="hasError('nome') && hasError('nome')['required']">
+        Nome é obrigatório
       </div>
-
-      <div class="form-group col-md-2">
-
+      <div class="invalid-feedback" *ngIf="hasError('nome') && hasError('nome')['maxlength']">
+        Nome precisa ter no máximo {{hasError('nome')['maxlength'].requiredLength}}
       </div>
+    </div>
+    <div class="col-md-4 mb-1">
 
     </div>
 
-  </form>
-</div>
+
+    <div class="col-md-4 mb-1">
+
+    </div>
+    <div class="col-md-4 mb-1">
+      <input type="text" class="form-control" id="endereco" formControlName="endereco" placeholder="Endereço da empresa"
+        [ngClass]="{'is-invalid': submitted && hasError('endereco')}">
+
+      <div class="invalid-feedback">
+        Endereço é obrigatório!
+      </div>
+    </div>
+    <div class="col-md-4 mb-1">
+
+    </div>
+
+    <div class="col-md-4 mb-1">
+
+    </div>
+    <div class="col-md-4 mb-1">
+      <input type="text" class="form-control" id="cnpj" formControlName="cnpj" placeholder="CNPJ da empresa"
+        [ngClass]="{'is-invalid': submitted && hasError('cnpj')}">
+
+      <div class="invalid-feedback">
+        CNPJ é obrigatório
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+
+    </div>
+    <div>
+      <button type="submit" class="btn btn-success" (click)="onSubmit()">Salvar</button>
+      <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+    </div>
+
+
+  </div>
+</form>

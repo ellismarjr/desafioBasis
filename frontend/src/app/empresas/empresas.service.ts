@@ -14,4 +14,8 @@ export class EmpresasService {
   find() {
     return this.http.get<Empresa[]>(this.API);
   }
+
+  create(empresa) {
+    return this.http.post(this.API, empresa);
+  }
 }
