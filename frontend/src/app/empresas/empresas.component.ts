@@ -1,37 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { EmpresasService } from './empresas.service';
-import { Empresa } from './empresa';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { EmpresasService } from "./empresas.service";
+import { Empresa } from "./empresa";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: 'app-empresas',
-  templateUrl: './empresas.component.html',
-  styleUrls: ['./empresas.component.css']
+  selector: "app-empresas",
+  templateUrl: "./empresas.component.html",
+  styleUrls: ["./empresas.component.css"]
 })
 export class EmpresasComponent implements OnInit {
-
   empresas: Empresa[];
 
-  constructor(private empresasService: EmpresasService,
-    private router: Router) { }
+
+  constructor(
+    private empresasService: EmpresasService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+
     this.find();
   }
 
   find() {
-    this.empresasService.find().subscribe(res => this.empresas = res['content']);
-    // this.empresasService.find().subscribe(console.log);
-    ;
+    this.empresasService
+      .find()
+      .subscribe(res => (this.empresas = res["content"]));
   }
 
-  goToUpdateEmpresa() {
-    this.router.navigate(['/empresas/update']);
+  onUpdate(id) {
+    this.router.navigate(["edit", id], { relativeTo: this.route });
   }
-
-  goToDeleteEmpresa() {
-    this.router.navigate(['/empresas/delete']);
-  }
-
-
 }
