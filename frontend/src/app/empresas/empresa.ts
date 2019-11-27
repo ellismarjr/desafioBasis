@@ -1,5 +1,5 @@
 export interface Empresa {
-  id: any;
+  id: number;
   nome: string;
   endereco: string;
   cnpj: string;

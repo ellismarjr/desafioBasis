@@ -20,9 +20,9 @@ export class EmpresasComponent implements OnInit {
   }
 
   find() {
-    this.empresasService.find().subscribe(res => {
-      this.empresas = res._embedded.empresas as Empresa[];
-    });
+    this.empresasService.find().subscribe(res => this.empresas = res['content']);
+    // this.empresasService.find().subscribe(console.log);
+    ;
   }
 
   goToUpdateEmpresa() {
@@ -32,5 +32,6 @@ export class EmpresasComponent implements OnInit {
   goToDeleteEmpresa() {
     this.router.navigate(['/empresas/delete']);
   }
+
 
 }
