@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 
@@ -18,7 +18,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmpresasComponent } from './empresas/empresas.component';
 import { CadEmpresasComponent } from './empresas/cad-empresas/cad-empresas.component';
 
-import { EmpresasService } from './empresas/empresas.service'
+import { EmpresasService } from './empresas/empresas.service';
 
 @NgModule({
   declarations: [
