@@ -13,9 +13,9 @@ public class Empresa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
-    private String name;
+    private String nome;
     private String endereco;
     private String cnpj;
 
@@ -25,11 +25,11 @@ public class Empresa implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEndereco() {
@@ -52,7 +52,7 @@ public class Empresa implements Serializable {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

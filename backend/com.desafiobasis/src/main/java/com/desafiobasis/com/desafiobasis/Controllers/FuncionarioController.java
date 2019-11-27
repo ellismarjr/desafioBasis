@@ -6,6 +6,7 @@ import com.desafiobasis.com.desafiobasis.Repository.EmpresaRepository;
 import com.desafiobasis.com.desafiobasis.Repository.FuncionarioRepository;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,14 +23,14 @@ public class FuncionarioController {
     @Autowired
     EmpresaRepository empresaRepository;
 
-    @GetMapping("/funcionarios")
+    @RequestMapping(value = "/funcionarios", method = RequestMethod.GET ,produces= MediaType.APPLICATION_JSON_VALUE)
     public List<Funcionario> find() {
         return funcionarioRepository.findAll();
     }
 
     @GetMapping("/funcionarios/{id}")
     @ResponseBody
-    public Funcionario show(@PathVariable(value = "id" ) long id) {
+    public Funcionario show(@PathVariable(value = "id" ) int id) {
         Funcionario funcionario = funcionarioRepository.findById(id);
         return funcionario;
     }
@@ -40,7 +41,7 @@ public class FuncionarioController {
         funcionario.setDataNascimento(body.get("dataNascimento"));
         funcionario.setCpf(body.get("cpf"));
 
-        long empresaId = Long.parseLong(body.get("empresa_id"));
+        int empresaId = Integer.parseInt(body.get("empresa_id"));
         empresa = empresaRepository.findById(empresaId);
         funcionario.setEmpresa(empresa);
 
