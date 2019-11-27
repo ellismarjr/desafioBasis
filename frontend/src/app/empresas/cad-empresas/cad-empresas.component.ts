@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpresasService } from '../empresas.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cad-empresas',
@@ -13,10 +14,10 @@ export class CadEmpresasComponent implements OnInit {
   form: FormGroup;
   submitted = false;
 
-  bsModalRef: BsModalRef;
 
   constructor(private fb: FormBuilder, private empresaService: EmpresasService,
-    private modalservice: BsModalService) { }
+    private toastr: ToastrService,
+    private router: Router) { }
 
   ngOnInit() {
 
@@ -33,12 +34,16 @@ export class CadEmpresasComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    console.log(this.form.value)
     if (this.form.valid) {
-      console.log('submit');
       this.empresaService.create(this.form.value).subscribe(
-        success => console.log('sucesso'),
-        error => console.log(error),
+        success => {
+          this.toastr.success("Empresa cadastrada com sucesso!");
+          this.router.navigate(['/empresas']);
+        },
+        error => {
+          this.onCancel();
+          this.toastr.error("Erro ao cadastrar empresa. Verifique seus dados!")
+        },
         () => console.log('request completo')
       );
     }
@@ -48,6 +53,10 @@ export class CadEmpresasComponent implements OnInit {
     this.submitted = false;
     this.form.reset();
     console.log('cancel');
+  }
+
+  showToast() {
+    this.toastr.success("Empresa cadastrada com sucesso!")
   }
 
 
