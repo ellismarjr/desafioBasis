@@ -13,7 +13,10 @@ export class EmpresasService {
   constructor(private http: HttpClient) {}
 
   find() {
-    return this.http.get<Empresa[]>(this.API).pipe(delay(2000), tap());
+    const response = this.http
+      .get<Empresa[]>(this.API)
+      .pipe(delay(2000), tap());
+    return response;
   }
 
   findById(id) {
@@ -28,16 +31,14 @@ export class EmpresasService {
     return this.http.put(`${this.API}/${empresa.id}`, empresa).pipe(take(1));
   }
 
-  delete(empresa) {
-    return this.http.delete(`${this.API}/${empresa.id}`, empresa).pipe(take(1));
+  delete(id) {
+    return this.http.delete(`${this.API}/${id}`).pipe(take(1));
   }
 
   save(empresa) {
     if (empresa.id) {
-      console.log("update");
       return this.update(empresa);
     } else {
-      console.log("create");
       return this.create(empresa);
     }
   }
