@@ -1,20 +1,27 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Resolve } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { Empresa } from '../empresa';
-import { EmpresasService } from '../empresas.service';
+import { Injectable } from "@angular/core";
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+  Resolve
+} from "@angular/router";
+import { Observable, of } from "rxjs";
+import { Empresa } from "../empresa";
+import { EmpresasService } from "../empresas.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class EmpresaResolverGuard implements Resolve<Empresa> {
+  constructor(private empresaService: EmpresasService) {}
 
-  constructor(private empresaService: EmpresasService) { }
-
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Empresa> {
-
-    if (route.params && route.params['id']) {
-      return this.empresaService.findById(route.params['id']);
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<Empresa> {
+    if (route.params && route.params["id"]) {
+      return this.empresaService.findById(route.params["id"]);
     }
 
     // retorna um Observalbe a partir de um objeto
@@ -22,7 +29,7 @@ export class EmpresaResolverGuard implements Resolve<Empresa> {
       id: null,
       nome: null,
       endereco: null,
-      cnpj: null,
+      cnpj: null
     });
   }
 }
