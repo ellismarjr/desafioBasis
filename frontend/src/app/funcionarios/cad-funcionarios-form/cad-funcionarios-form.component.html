@@ -1,52 +1,126 @@
-<div class="container">
-
-  <form>
-    <div class="form-row">
-      <div class="form-group col-md-2">
-
+<form class="needs-validation" novalidate [formGroup]="formFuncionario">
+  <div class="form-row">
+    <div class="col-md-4 mb-1"></div>
+    <div class="col-md-4 mb-1">
+      <div class="alert alert-primary" role="alert">
+        Cadastro de Funcionários
       </div>
-
-      <div class="form-group col-md-6">
-        <div class="alert alert-primary" role="alert">
-          Cadastro de Funcinários
-        </div>
-
-        <div class="form-group">
-          <input type="text" class="form-control" id="inputName4" placeholder="Nome completo">
-        </div>
-
-        <div class="form-group">
-          <input type="text" class="form-control" id="inputDataNascimento4" placeholder="Data de Nascimento">
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" id="inputCpf4" placeholder="CPF">
-        </div>
-
-        <div class="row">
-          <div class="col-md-8">
-            <select class="form-control">
-              <option value="#" selected>Empresas...</option>
-              <option value="+47">Norge (+47)</option>
-              <option value="+46">Sverige (+46)</option>
-              <option value="+45">Danmark (+45)</option>
-            </select>
-          </div>
-
-          <div class="col-md-4">
-            <button type="submit" class="btn btn-success mb-2">Salvar</button>
-          </div>
-        </div>
-
-
+      <input
+        type="text"
+        class="form-control"
+        id="nome"
+        formControlName="nome"
+        placeholder="Nome da empresa"
+        [ngClass]="{ 'is-invalid': submitted && hasError('nome') }"
+      />
+      <div
+        class="invalid-feedback"
+        *ngIf="hasError('nome') && hasError('nome')['required']"
+      >
+        Nome é obrigatório
       </div>
-
-
-
-      <div class="form-group col-md-2">
-
+      <div
+        class="invalid-feedback"
+        *ngIf="hasError('nome') && hasError('nome')['maxlength']"
+      >
+        Nome precisa ter no máximo
+        {{ hasError("nome")["maxlength"].requiredLength }}
       </div>
+    </div>
+    <div class="col-md-4 mb-1"></div>
 
+    <div class="col-md-4 mb-1"></div>
+    <div class="col-md-4 mb-1">
+      <input
+        type="text"
+        class="form-control"
+        id="dataNascimento"
+        formControlName="dataNascimento"
+        placeholder="Data de nascimento"
+        [ngClass]="{ 'is-invalid': submitted && hasError('dataNascimento') }"
+      />
+
+      <div class="invalid-feedback">
+        Data de nascimento é obrigatório!
+      </div>
+    </div>
+    <div class="col-md-4 mb-1"></div>
+
+    <div class="col-md-4 mb-1"></div>
+    <div class="col-md-4 mb-1">
+      <input
+        type="text"
+        class="form-control"
+        id="cpf"
+        formControlName="cpf"
+        placeholder="CPF"
+        [ngClass]="{ 'is-invalid': submitted && hasError('cpf') }"
+      />
+
+      <div class="invalid-feedback">
+        CPF é obrigatório
+      </div>
     </div>
 
-  </form>
+    <div class="col-md-4 mb-1"></div>
+
+    <div class="col-md-4 mb-1"></div>
+    <!-- <div class="col-md-4 mb-3">
+      <select
+        name=""
+        id="empresa"
+        class="form-control"
+        formControlName="empresa"
+      >
+        <option value="#">Empresas...</option>
+      </select>
+    </div> -->
+
+    <div
+      *ngIf="!isEmpresaEmpty; then isNotEmptyEmpresa; else isEmptyEmpresa"
+      class="container"
+    ></div>
+    <div class="col-md-4 mb-3"></div>
+
+    <div>
+      <button type="submit" class="btn btn-success" (click)="onSubmit()">
+        Salvar
+      </button>
+      <button type="button" class="btn btn-default" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+  </div>
+
+  <ng-template #isEmptyEmpresa>
+    <div class="col-md-4 mb-3">
+      <select
+        name=""
+        id="empresa_id"
+        class="form-control"
+        formControlName="empresa_id"
+      >
+        <option value="#" selected>Nenhuma empresa cadastrada...</option>
+      </select>
+    </div>
+  </ng-template>
+
+  <ng-template #isNotEmptyEmpresa>
+    <div class="col-md-4 mb-3">
+      <select
+        name=""
+        id="empresa_id"
+        class="form-control"
+        formControlName="empresa_id"
+      >
+        <option *ngFor="let empresa of empresas" [value]="empresa.id">{{
+          empresa.nome
+        }}</option>
+      </select>
+    </div>
+  </ng-template>
+</form>
+
+<div>
+  <router-outlet></router-outlet>
 </div>
