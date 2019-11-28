@@ -1,40 +1,84 @@
 <div class="container">
-
   <ul class="list-group">
-    <li class="list-group-item active">Empresas
+    <li class="list-group-item active">
+      Empresas
       <a [routerLink]="['/empresas/add']" routerLinkActive="router-link-active">
         <button type="button" class="btn btn-info">Cadastrar</button>
       </a>
     </li>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Cod.</th>
-          <th scope="col">Nome</th>
-          <th scope="col">Endereço</th>
-          <th scope="col">CNPJ</th>
-          <th scope="col">##</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr *ngFor="let empresa of empresas">
-          <th scope="row">{{empresa.id}}</th>
-          <td>{{empresa.nome}}</td>
-          <td>{{empresa.endereco}}</td>
-          <td>{{empresa.cnpj}}</td>
-          <td>
-            <button type="button" class="btn btn-primary" (click)="onUpdate(empresa.id)">Editar</button>
-            <button type="button" class="btn btn-danger float-sm-">Excluir</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div
+      *ngIf="!isEmpty; then isNotEmptyEmpresa; else isEmptyEmpresa"
+      class="container"
+    ></div>
   </ul>
 </div>
 
+<ng-template #isNotEmptyEmpresa>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Cod.</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Endereço</th>
+        <th scope="col">CNPJ</th>
+        <th scope="col">##</th>
+      </tr>
+    </thead>
 
+    <tbody>
+      <tr *ngFor="let empresa of empresas">
+        <th scope="row">{{ empresa.id }}</th>
+        <td>{{ empresa.nome }}</td>
+        <td>{{ empresa.endereco }}</td>
+        <td>{{ empresa.cnpj }}</td>
+        <td>
+          <button
+            style="margin-right: 20px;"
+            type="button"
+            class="btn btn-primary"
+            (click)="onUpdate(empresa.id)"
+          >
+            Editar
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger float-sm-"
+            (click)="onDelete(empresa)"
+          >
+            Excluir
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>
+
+<ng-template #isEmptyEmpresa>
+  <div class="alert alert-secondary" role="alert">
+    <h4 class="alert-heading"></h4>
+    <p>
+      Nenhuma empresa cadastrada até o momento!
+    </p>
+  </div>
+</ng-template>
+
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Tem certeze que deseja excluir?</p>
+    <button
+      style="margin-right: 20px;"
+      type="button"
+      class="btn btn-primary"
+      (click)="onConfirmDelete()"
+    >
+      Sim
+    </button>
+    <span></span>
+    <button type="button" class="btn btn-secondary" (click)="onDeclineDelete()">
+      Não
+    </button>
+  </div>
+</ng-template>
 
 <div class="container">
   <router-outlet></router-outlet>

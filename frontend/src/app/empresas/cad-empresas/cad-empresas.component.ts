@@ -3,7 +3,8 @@ import { EmpresasService } from "../empresas.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { map, switchMap, exhaustMap } from "rxjs/operators";
+import { Location } from "@angular/common";
+import { switchMap } from "rxjs/operators";
 
 @Component({
   selector: "app-cad-empresas",
@@ -19,11 +20,19 @@ export class CadEmpresasComponent implements OnInit {
     private empresaService: EmpresasService,
     private toastr: ToastrService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit() {
     const empresa = this.route.snapshot.data["empresa"];
+
+    // this.form = this.fb.group({
+    //   id: [null],
+    //   nome: [null, [Validators.required, Validators.maxLength(250)]],
+    //   endereco: [null, [Validators.required, Validators.maxLength(250)]],
+    //   cnpj: [null, [Validators.required, Validators.maxLength(14)]]
+    // });
 
     this.form = this.fb.group({
       id: [empresa.id],
@@ -43,12 +52,10 @@ export class CadEmpresasComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.form.valid) {
-      console.log("create");
       let msgSuccess = "Empresa cadastrada com sucesso!";
       let msgError = "Erro ao cadastrar empresa. Verifique seus dados!";
 
       if (this.form.value.id) {
-        console.log("update");
         msgSuccess = "Empresa atualizada com sucesso!";
         msgError = "Erro ao atualizar empresa. Verifique seus dados!";
       }
@@ -56,38 +63,13 @@ export class CadEmpresasComponent implements OnInit {
       this.empresaService.save(this.form.value).subscribe(
         success => {
           this.toastr.success(msgSuccess);
-          this.router.navigate(["/empresas"]);
+          this.location.back();
         },
         error => {
           this.onCancel();
           this.toastr.error(msgError);
         }
       );
-
-      // if (this.form.value.id) {
-      //   // update
-      //   this.empresaService.update(this.form.value).subscribe(
-      //     success => {},
-      //     error => {
-      //       this.onCancel();
-      //     },
-      //     () => console.log("request completo")
-      //   );
-      // } else {
-      //   this.empresaService.create(this.form.value).subscribe(
-      //     success => {
-      //       this.toastr.success("Empresa cadastrada com sucesso!");
-      //       this.router.navigate(["/empresas"]);
-      //     },
-      //     error => {
-      //       this.onCancel();
-      //       this.toastr.error(
-      //         "Erro ao cadastrar empresa. Verifique seus dados!"
-      //       );
-      //     },
-      //     () => console.log("request completo")
-      //   );
-      // }
     }
   }
 
