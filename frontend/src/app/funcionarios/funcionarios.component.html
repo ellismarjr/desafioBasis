@@ -1,60 +1,82 @@
 <div class="container">
-
   <ul class="list-group">
-    <li class="list-group-item active">Funcionários
-      <a [routerLink]="['/funcionarios/add']" routerLinkActive="router-link-active">
+    <li class="list-group-item active">
+      Funcionários
+      <a
+        [routerLink]="['/funcionarios/add']"
+        routerLinkActive="router-link-active"
+      >
         <button type="button" class="btn btn-info">Cadastrar</button>
       </a>
     </li>
-
-    <li class="list-group-item">Dapibus ac facilisis in
-      <a [routerLink]="['/funcionarios/delete']" routerLinkActive="router-link-active">
-        <button type="button" class="btn btn-danger float-sm-right">Excluir</button>
-      </a>
-      <a [routerLink]="['/funcionarios/update']" routerLinkActive="router-link-active">
-        <button type="button" class="btn btn-primary float-sm-right">Editar</button>
-      </a>
-    </li>
-
-    <li class="list-group-item">Dapibus ac facilisis in
-      <a [routerLink]="['/funcionarios/delete']" routerLinkActive="router-link-active">
-        <button type="button" class="btn btn-danger float-sm-right">Excluir</button>
-      </a>
-      <a [routerLink]="['/funcionarios/update']" routerLinkActive="router-link-active">
-        <button type="button" class="btn btn-primary float-sm-right">Editar</button>
-      </a>
-    </li>
-
-    <li class="list-group-item">Dapibus ac facilisis in
-      <a [routerLink]="['/funcionarios/delete']" routerLinkActive="router-link-active">
-        <button type="button" class="btn btn-danger float-sm-right">Excluir</button>
-      </a>
-      <a [routerLink]="['/funcionarios/update']" routerLinkActive="router-link-active">
-        <button type="button" class="btn btn-primary float-sm-right">Editar</button>
-      </a>
-    </li>
-
-    <li class="list-group-item">Dapibus ac facilisis in
-      <a [routerLink]="['/funcionarios/delete']" routerLinkActive="router-link-active">
-        <button type="button" class="btn btn-danger float-sm-right">Excluir</button>
-      </a>
-      <a [routerLink]="['/funcionarios/update']" routerLinkActive="router-link-active">
-        <button type="button" class="btn btn-primary float-sm-right">Editar</button>
-      </a>
-    </li>
-
-    <li class="list-group-item">Dapibus ac facilisis in
-      <a [routerLink]="['/funcionarios/delete']" routerLinkActive="router-link-active">
-        <button type="button" class="btn btn-danger float-sm-right">Excluir</button>
-      </a>
-      <a [routerLink]="['/funcionarios/update']" routerLinkActive="router-link-active">
-        <button type="button" class="btn btn-primary float-sm-right">Editar</button>
-      </a>
-    </li>
-
+    <div
+      *ngIf="!isEmpty; then isNotEmptyFuncionario; else isEmptyFuncionario"
+      class="container"
+    ></div>
   </ul>
 </div>
 
-<div>
+<ng-template #isNotEmptyFuncionario>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Cod.</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Nascimento</th>
+        <th scope="col">CPF</th>
+        <th scope="col">##</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let empresa of empresas">
+        <th scope="row">{{ funcionario.id }}</th>
+        <td>{{ funcionario.nome }}</td>
+        <td>{{ funcionario.endereco }}</td>
+        <td>{{ funcionario.cnpj }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="onUpdate(funcionario.id)"
+          >
+            Editar
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger float-sm-"
+            (click)="onDelete(funcionario)"
+          >
+            Excluir
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>
+
+<ng-template #isEmptyFuncionario>
+  <div class="alert alert-secondary" role="alert">
+    <h4 class="alert-heading"></h4>
+    <p>
+      Nenhum funcionário cadastrado até o momento!
+    </p>
+  </div>
+</ng-template>
+
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Tem certeze que deseja excluir?</p>
+    <button type="button" class="btn btn-primary" (click)="onConfirmDelete()">
+      Sim
+    </button>
+    <span></span>
+    <button type="button" class="btn btn-secondary" (click)="onDeclineDelete()">
+      Não
+    </button>
+  </div>
+</ng-template>
+
+<div class="container">
   <router-outlet></router-outlet>
 </div>
