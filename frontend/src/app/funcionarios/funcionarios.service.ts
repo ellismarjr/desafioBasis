@@ -35,8 +35,6 @@ export class FuncionariosService {
 
   save(funcionario) {
     if (funcionario.id) {
-      console.log(funcionario);
-
       return this.update(funcionario);
     } else {
       return this.create(funcionario);

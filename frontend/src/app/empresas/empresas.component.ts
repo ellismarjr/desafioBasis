@@ -50,7 +50,6 @@ export class EmpresasComponent implements OnInit {
     this.empresasService.find().subscribe(
       res => {
         this.empresas = res;
-        console.log(res);
         // Check if response is empty
         if (res.length === 0) {
           this.isEmpty = true;

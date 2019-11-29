@@ -61,8 +61,6 @@ export class CadFuncionariosFormComponent implements OnInit {
         msgError = "Erro ao atualizar funcionario. Verifique seus dados!";
       }
 
-      console.log(this.formFuncionario.value);
-
       this.funcionarioService.save(this.formFuncionario.value).subscribe(
         success => {
           this.toastr.success(msgSuccess);
