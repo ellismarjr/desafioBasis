@@ -51,8 +51,9 @@ public class FuncionarioController {
     }
 
     @PutMapping("/funcionarios")
-    public Funcionario update(@RequestBody Funcionario funcionario) {
-        return funcionarioRepository.save(funcionario);
+    public FuncionarioDTO update(@RequestBody FuncionarioDTO funcionarioDTO) {
+        Funcionario funcionario = funcionarioMapper.toEntity(funcionarioDTO);
+        return  funcionarioMapper.toDto((funcionarioRepository.save(funcionario)));
     }
 
     @DeleteMapping("/funcionarios/{id}")
