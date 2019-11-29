@@ -68,7 +68,12 @@
 <ng-template #deleteModal>
   <div class="modal-body text-center">
     <p>Tem certeze que deseja excluir?</p>
-    <button type="button" class="btn btn-primary" (click)="onConfirmDelete()">
+    <button
+      style="margin-right: 30px;"
+      type="button"
+      class="btn btn-primary"
+      (click)="onConfirmDelete()"
+    >
       Sim
     </button>
     <span></span>
