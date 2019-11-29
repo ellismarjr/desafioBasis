@@ -43,6 +43,16 @@
       <div class="invalid-feedback">
         Data de nascimento é obrigatório!
       </div>
+
+      <div
+        class="invalid-feedback"
+        *ngIf="
+          hasError('dataNascimento') && hasError('dataNascimento')['maxlength']
+        "
+      >
+        Data de nascimento precisa ter no máximo
+        {{ hasError("dataNascimento")["maxlength"].requiredLength }}
+      </div>
     </div>
     <div class="col-md-4 mb-1"></div>
 
@@ -59,6 +69,14 @@
 
       <div class="invalid-feedback">
         CPF é obrigatório
+      </div>
+
+      <div
+        class="invalid-feedback"
+        *ngIf="hasError('cpf') && hasError('cpf')['maxlength']"
+      >
+        CPF precisa ter no máximo
+        {{ hasError("cpf")["maxlength"].requiredLength }}
       </div>
     </div>
 
@@ -99,9 +117,15 @@
         id="empresaId"
         class="form-control"
         formControlName="empresaId"
+        [ngClass]="{
+          'is-invalid': submitted && hasError('empresaId')['required']
+        }"
       >
-        <option value="#" selected>Nenhuma empresa cadastrada...</option>
       </select>
+
+      <div class="invalid-feedback">
+        Empresa é obrigatória
+      </div>
     </div>
   </ng-template>
 
