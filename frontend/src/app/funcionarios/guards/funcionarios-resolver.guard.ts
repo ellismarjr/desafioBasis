@@ -30,7 +30,7 @@ export class funcionarioResolverGuard implements Resolve<Funcionario> {
       nome: null,
       dataNascimento: null,
       cpf: null,
-      empresa: null
+      empresaId: null
     });
   }
 }
