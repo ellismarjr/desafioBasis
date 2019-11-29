@@ -1,60 +1,41 @@
 package com.desafiobasis.com.desafiobasis.Models;
 
-import org.springframework.data.rest.core.annotation.RestResource;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "empresas")
 public class Empresa implements Serializable {
     private static  final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     private String nome;
     private String endereco;
     private String cnpj;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Funcionario> funcionarios = new ArrayList<>();
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public String getName() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
+    public Empresa(Long id, String nome, String endereco, String cnpj) {
+        this.id = id;
         this.nome = nome;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
         this.endereco = endereco;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
-    public long getId() {
-        return id;
+    public Empresa() {
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
 }

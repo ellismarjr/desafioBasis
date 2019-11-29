@@ -4,7 +4,7 @@ import com.desafiobasis.com.desafiobasis.Models.Funcionario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
-    Funcionario findById(long id);
+    Funcionario findById(long Id);
 
-    Funcionario deleteById(long id);
+    Funcionario deleteById(long Id);
 }

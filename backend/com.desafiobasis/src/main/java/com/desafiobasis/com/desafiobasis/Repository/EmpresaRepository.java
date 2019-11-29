@@ -5,9 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
 
-    Empresa findById(int id);
+    Empresa findById(long Id);
 
-    Empresa deleteById(int id);
+    Empresa deleteById(long Id);
+
 
 
 }

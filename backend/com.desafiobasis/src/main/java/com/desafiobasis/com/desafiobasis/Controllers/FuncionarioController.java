@@ -2,6 +2,8 @@ package com.desafiobasis.com.desafiobasis.Controllers;
 
 import com.desafiobasis.com.desafiobasis.Models.Empresa;
 import com.desafiobasis.com.desafiobasis.Models.Funcionario;
+import com.desafiobasis.com.desafiobasis.Models.dto.FuncionarioDTO;
+import com.desafiobasis.com.desafiobasis.Models.mapper.FuncionarioMapper;
 import com.desafiobasis.com.desafiobasis.Repository.EmpresaRepository;
 import com.desafiobasis.com.desafiobasis.Repository.FuncionarioRepository;
 import net.minidev.json.JSONObject;
@@ -18,34 +20,34 @@ import java.util.Map;
 public class FuncionarioController {
 
     @Autowired
+    FuncionarioMapper funcionarioMapper;
+
+    @Autowired
     FuncionarioRepository funcionarioRepository;
 
     @Autowired
     EmpresaRepository empresaRepository;
 
-    @RequestMapping(value = "/funcionarios", method = RequestMethod.GET ,produces= MediaType.APPLICATION_JSON_VALUE)
+
+
+//    @RequestMapping(value = "/funcionarios", method = RequestMethod.GET ,produces= MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/funcionarios")
     public List<Funcionario> find() {
-        return funcionarioRepository.findAll();
+        List<Funcionario> funcionario = funcionarioRepository.findAll();
+        return funcionario;
     }
 
     @GetMapping("/funcionarios/{id}")
     @ResponseBody
-    public Funcionario show(@PathVariable(value = "id" ) int id) {
+    public Funcionario show(@PathVariable(value = "id" ) long id) {
         Funcionario funcionario = funcionarioRepository.findById(id);
         return funcionario;
     }
 
     @PostMapping("/funcionarios")
-    public Funcionario create(@RequestBody Map<String, String> body, Funcionario funcionario, Empresa empresa) {
-        funcionario.setNome(body.get("nome"));
-        funcionario.setDataNascimento(body.get("dataNascimento"));
-        funcionario.setCpf(body.get("cpf"));
-
-        int empresaId = Integer.parseInt(body.get("empresa_id"));
-        empresa = empresaRepository.findById(empresaId);
-        funcionario.setEmpresa(empresa);
-
-        return funcionarioRepository.save(funcionario);
+    public FuncionarioDTO create(@RequestBody FuncionarioDTO funcionarioDTO) {
+        Funcionario funcionario = funcionarioMapper.toEntity(funcionarioDTO);
+        return funcionarioMapper.toDto(funcionarioRepository.save(funcionario));
     }
 
     @PutMapping("/funcionarios")
