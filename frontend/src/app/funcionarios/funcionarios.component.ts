@@ -37,7 +37,6 @@ export class FuncionariosComponent implements OnInit {
     this.funcionarioService.find().subscribe(
       res => {
         this.funcionarios = res;
-        console.log(this.funcionarios);
         if (res.length === 0) {
           this.isEmpty = true;
         } else {
