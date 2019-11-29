@@ -87,6 +87,7 @@ export class EmpresasComponent implements OnInit {
         this.toastr.error(
           "Erro ao tentar excluir empresa. Tente novamente mais tarde!"
         );
+        this.deleteModalRef.hide();
       }
     );
   }

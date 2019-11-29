@@ -83,6 +83,7 @@ export class FuncionariosComponent implements OnInit {
         this.toastr.error(
           "Erro ao tentar excluir funcionário. Tente novamente mais tarde!"
         );
+        this.deleteModalRef.hide();
       }
     );
   }
