@@ -25,7 +25,7 @@ export class EmpresasService {
   }
 
   private update(empresa) {
-    return this.http.put(`${this.API}/${empresa.id}`, empresa).pipe(take(1));
+    return this.http.put(`${this.API}`, empresa).pipe(take(1));
   }
 
   delete(id) {
