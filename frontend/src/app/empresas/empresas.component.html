@@ -17,7 +17,6 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Cod.</th>
         <th scope="col">Nome</th>
         <th scope="col">Endereço</th>
         <th scope="col">CNPJ</th>
@@ -27,7 +26,6 @@
 
     <tbody>
       <tr *ngFor="let empresa of empresas">
-        <th scope="row">{{ empresa.id }}</th>
         <td>{{ empresa.nome }}</td>
         <td>{{ empresa.endereco }}</td>
         <td>{{ empresa.cnpj }}</td>
