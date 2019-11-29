@@ -6,6 +6,7 @@ import com.desafiobasis.com.desafiobasis.Models.dto.FuncionarioDTO;
 import com.desafiobasis.com.desafiobasis.Models.mapper.FuncionarioMapper;
 import com.desafiobasis.com.desafiobasis.Repository.EmpresaRepository;
 import com.desafiobasis.com.desafiobasis.Repository.FuncionarioRepository;
+import com.desafiobasis.com.desafiobasis.error.ResourceNotFoundException;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -52,12 +53,20 @@ public class FuncionarioController {
 
     @PutMapping("/funcionarios")
     public FuncionarioDTO update(@RequestBody FuncionarioDTO funcionarioDTO) {
+        verifyFuncionarioExists(funcionarioDTO.getId());
         Funcionario funcionario = funcionarioMapper.toEntity(funcionarioDTO);
         return  funcionarioMapper.toDto((funcionarioRepository.save(funcionario)));
     }
 
     @DeleteMapping("/funcionarios/{id}")
     public void destroy(@PathVariable(value = "id") long id) {
+        verifyFuncionarioExists(id);
         funcionarioRepository.deleteById(id);
+    }
+
+    private void verifyFuncionarioExists(long id) {
+        if (funcionarioRepository.findById(id) == null) {
+            throw new ResourceNotFoundException("Funionário não encontrada de ID: " + id);
+        }
     }
 }

@@ -31,7 +31,7 @@ public class EmpresaController {
 
     @GetMapping("/empresas/{id}")
     @ResponseBody
-    public ResponseEntity<?> show(@PathVariable(value = "id" ) long id) {
+    public ResponseEntity<?> show(@PathVariable(value = "id") long id) {
         verifyEmpresaExists(id);
         Empresa empresa = empresaRepository.findById(id);
         return new ResponseEntity<>(empresa, HttpStatus.OK);
@@ -44,8 +44,10 @@ public class EmpresaController {
     }
 
     @PutMapping("/empresas")
-    public EmpresaDTO update(@RequestBody EmpresaDTO empresaDTO){
+    public EmpresaDTO update(@RequestBody EmpresaDTO empresaDTO) {
+        verifyEmpresaExists(empresaDTO.getId());
         Empresa empresa = empresaMapper.toEntity(empresaDTO);
+
         return empresaMapper.toDto(empresaRepository.save(empresa));
     }
 
@@ -57,10 +59,9 @@ public class EmpresaController {
     }
 
     private void verifyEmpresaExists(long id) {
-        if ( empresaRepository.findById(id) == null) {
+        if (empresaRepository.findById(id) == null) {
             throw new ResourceNotFoundException("Empresa não encontrada de ID: " + id);
         }
     }
-
 }
 
