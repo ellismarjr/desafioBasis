@@ -60,6 +60,13 @@
       <div class="invalid-feedback">
         CNPJ é obrigatório
       </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="hasError('cnpj') && hasError('cnpj')['maxlength']"
+      >
+        CNPJ precisa ter no máximo
+        {{ hasError("cnpj")["maxlength"].requiredLength }}
+      </div>
     </div>
     <div class="col-md-4 mb-3"></div>
     <div>
