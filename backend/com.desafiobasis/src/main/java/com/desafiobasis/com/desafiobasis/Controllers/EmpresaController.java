@@ -1,6 +1,8 @@
 package com.desafiobasis.com.desafiobasis.Controllers;
 
 import com.desafiobasis.com.desafiobasis.Models.Empresa;
+import com.desafiobasis.com.desafiobasis.Models.dto.EmpresaDTO;
+import com.desafiobasis.com.desafiobasis.Models.mapper.EmpresaMapper;
 import com.desafiobasis.com.desafiobasis.Repository.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,10 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:4200/")
 @RequestMapping(value = "/api")
 public class EmpresaController {
+
+    @Autowired
+    EmpresaMapper empresaMapper;
+
     @Autowired
     EmpresaRepository empresaRepository;
 
@@ -37,29 +43,21 @@ public class EmpresaController {
     }
 
     @PostMapping("/empresas")
-    public Empresa create(@RequestBody Empresa empresa) {
-        return empresaRepository.save(empresa);
+    public EmpresaDTO create(@RequestBody EmpresaDTO empresaDTO) {
+        Empresa empresa = empresaMapper.toEntity(empresaDTO);
+        return empresaMapper.toDto(empresaRepository.save(empresa));
     }
 
-    @PutMapping(value = "/empresas/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Empresa update(@PathVariable(value = "id") long id, @RequestBody Map<String, String> body) {
-        long empresaId = id;
-        System.out.println(body.get("id"));
-        Empresa empresa = empresaRepository.findById(empresaId);
-
-        empresa.setNome(body.get(("nome")));
-        empresa.setEndereco(body.get("endereco"));
-        empresa.setCnpj(body.get("cnpj"));
-
-        empresaRepository.save(empresa);
-        return empresa;
+    @PutMapping("/empresas")
+    public EmpresaDTO update(@RequestBody EmpresaDTO empresaDTO){
+        Empresa empresa = empresaMapper.toEntity(empresaDTO);
+        return empresaMapper.toDto(empresaRepository.save(empresa));
     }
 
     @DeleteMapping("/empresas/{id}")
     public void destroy(@PathVariable(value = "id") long id) {
         empresaRepository.deleteById(id);
     }
-
 
 }
 
