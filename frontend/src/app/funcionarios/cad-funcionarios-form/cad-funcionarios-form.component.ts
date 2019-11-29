@@ -53,11 +53,11 @@ export class CadFuncionariosFormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.formFuncionario.valid) {
-      let msgSuccess = "Empresa cadastrada com sucesso!";
+      let msgSuccess = "Funcionário cadastrado com sucesso!";
       let msgError = "Erro ao cadastrar funcionario. Verifique seus dados!";
 
       if (this.formFuncionario.value.id) {
-        msgSuccess = "Empresa atualizada com sucesso!";
+        msgSuccess = "Funcionário atualizado com sucesso!";
         msgError = "Erro ao atualizar funcionario. Verifique seus dados!";
       }
 
