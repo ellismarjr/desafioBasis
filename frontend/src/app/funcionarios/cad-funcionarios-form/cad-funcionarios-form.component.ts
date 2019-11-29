@@ -40,7 +40,7 @@ export class CadFuncionariosFormComponent implements OnInit {
         [Validators.required, Validators.maxLength(250)]
       ],
       cpf: [funcionario.cpf, [Validators.required, Validators.maxLength(14)]],
-      empresaId: [funcionario.empresaId]
+      empresaId: [funcionario.empresaId, [Validators.required]]
     });
 
     this.loadEmpresas();

@@ -112,11 +112,16 @@
         id="empresaId"
         class="form-control"
         formControlName="empresaId"
+        [ngClass]="{ 'is-invalid': submitted && hasError('empresaId') }"
       >
         <option *ngFor="let empresa of empresas" [value]="empresa.id">{{
           empresa.nome
         }}</option>
       </select>
+
+      <div class="invalid-feedback">
+        Empresa é obrigatória
+      </div>
     </div>
   </ng-template>
 </form>
