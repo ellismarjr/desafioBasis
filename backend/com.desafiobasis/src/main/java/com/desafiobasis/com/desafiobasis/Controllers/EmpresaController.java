@@ -26,9 +26,7 @@ public class EmpresaController {
     @Autowired
     EmpresaRepository empresaRepository;
 
-
-//    @GetMapping("/empresas")
-    @RequestMapping(method = RequestMethod.GET, value = "/empresas", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/empresas")
     @ResponseBody
     public List<Empresa> find() {
         return empresaRepository.findAll();
