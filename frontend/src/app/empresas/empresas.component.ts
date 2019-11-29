@@ -78,10 +78,10 @@ export class EmpresasComponent implements OnInit {
   onConfirmDelete() {
     this.empresasService.delete(this.empresaSelecionada.id).subscribe(
       success => {
-        this.toastr.success("Empresa excluída com sucesso!");
         // this.router.navigate(["/empresas"]);
         window.location.reload();
         this.deleteModalRef.hide();
+        this.toastr.success("Empresa excluída com sucesso!");
       },
       error => {
         this.toastr.error(
