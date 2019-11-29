@@ -37,6 +37,7 @@ export class FuncionariosComponent implements OnInit {
     this.funcionarioService.find().subscribe(
       res => {
         this.funcionarios = res;
+
         if (res.length === 0) {
           this.isEmpty = true;
         } else {
@@ -73,10 +74,10 @@ export class FuncionariosComponent implements OnInit {
   onConfirmDelete() {
     this.funcionarioService.delete(this.funcionarioSelecionado.id).subscribe(
       success => {
-        this.toastr.success("Funcionário excluído com sucesso!");
         // this.router.navigate(["/empresas"]);
         window.location.reload();
         this.deleteModalRef.hide();
+        this.toastr.success("Funcionário excluído com sucesso!");
       },
       error => {
         this.toastr.error(
