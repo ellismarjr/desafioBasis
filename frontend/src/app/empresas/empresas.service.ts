@@ -8,15 +8,12 @@ import { Empresa } from "./empresa";
   providedIn: "root"
 })
 export class EmpresasService {
-  private readonly API = "http://localhost:8080/empresas";
+  private readonly API = "http://localhost:8080/api/empresas";
 
   constructor(private http: HttpClient) {}
 
   find() {
-    const response = this.http
-      .get<Empresa[]>(this.API)
-      .pipe(delay(2000), tap());
-    return response;
+    return this.http.get<Empresa[]>(this.API).pipe(tap());
   }
 
   findById(id) {

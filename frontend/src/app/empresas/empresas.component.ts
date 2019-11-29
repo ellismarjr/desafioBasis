@@ -49,9 +49,10 @@ export class EmpresasComponent implements OnInit {
   find() {
     this.empresasService.find().subscribe(
       res => {
-        this.empresas = res["content"];
+        this.empresas = res;
+        console.log(res);
         // Check if response is empty
-        if (res["content"][0]["rel"] === null) {
+        if (res.length === 0) {
           this.isEmpty = true;
         } else {
           this.isEmpty = false;

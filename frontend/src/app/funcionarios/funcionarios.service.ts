@@ -1,21 +1,20 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { tap, delay, take } from "rxjs/operators";
+
 import { Funcionario } from "./funcionarios";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class FuncionariosService {
-  private readonly API = "http://localhost:8080/funcionarios";
+  private API = "http://localhost:8080/api/funcionarios";
 
   constructor(private http: HttpClient) {}
 
-  find() {
-    const response = this.http
-      .get<Funcionario[]>(this.API)
-      .pipe(delay(2000), tap());
-    return response;
+  find(): Observable<any> {
+    return this.http.get(this.API);
   }
 
   findById(id) {

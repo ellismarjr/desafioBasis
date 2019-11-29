@@ -12,9 +12,9 @@ import { Funcionario } from "./funcionarios";
   styleUrls: ["./funcionarios.component.css"]
 })
 export class FuncionariosComponent implements OnInit {
-  funcionario: Funcionario[];
+  funcionarios: Funcionario[];
   error$ = new Subject<boolean>();
-  isEmpty = false;
+  isEmpty = true;
 
   deleteModalRef: BsModalRef;
   @ViewChild("deleteModal", { static: false }) deleteModal;
@@ -36,12 +36,22 @@ export class FuncionariosComponent implements OnInit {
   find() {
     this.funcionarioService.find().subscribe(
       res => {
-        this.funcionario = res["content"];
-        if (res["content"][0]["rel"] === null) {
+        this.funcionarios = res;
+        console.log(this.funcionarios);
+        if (res.length === 0) {
           this.isEmpty = true;
         } else {
           this.isEmpty = false;
         }
+
+        // console.log(this.funcionario[0]);
+        // if (res["content"][0]["rel"] === null) {
+        //   // this.isEmpty = true;
+        //   // console.log(res["content"]);
+        //   // console.log(this.isEmpty);
+        // } else {
+        //   // this.isEmpty = false;
+        // }
       },
       error =>
         this.toastr.error(
@@ -54,8 +64,8 @@ export class FuncionariosComponent implements OnInit {
     this.router.navigate(["edit", id], { relativeTo: this.route });
   }
 
-  onDelete(empresa) {
-    this.funcionarioSelecionado = empresa;
+  onDelete(funcionario) {
+    this.funcionarioSelecionado = funcionario;
     this.deleteModalRef = this.bsModalService.show(this.deleteModal, {
       class: "modal-sm"
     });

@@ -40,7 +40,7 @@ export class CadFuncionariosFormComponent implements OnInit {
         [Validators.required, Validators.maxLength(250)]
       ],
       cpf: [funcionario.cpf, [Validators.required, Validators.maxLength(14)]],
-      empresa_id: [funcionario.empresa_id]
+      empresaId: [funcionario.empresaId]
     });
 
     this.loadEmpresas();
@@ -60,6 +60,8 @@ export class CadFuncionariosFormComponent implements OnInit {
         msgSuccess = "Empresa atualizada com sucesso!";
         msgError = "Erro ao atualizar funcionario. Verifique seus dados!";
       }
+
+      console.log(this.formFuncionario.value);
 
       this.funcionarioService.save(this.formFuncionario.value).subscribe(
         success => {
@@ -83,9 +85,10 @@ export class CadFuncionariosFormComponent implements OnInit {
   loadEmpresas() {
     this.empresasService.find().subscribe(
       res => {
-        this.empresas = res["content"];
+        this.empresas = res;
         // Check if response is empty
-        if (res["content"][0]["rel"] === null) {
+
+        if (res.length == 0) {
           this.isEmpresaEmpty = true;
         } else {
           this.isEmpresaEmpty = false;
