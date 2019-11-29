@@ -10,7 +10,7 @@
         class="form-control"
         id="nome"
         formControlName="nome"
-        placeholder="Nome da empresa"
+        placeholder="Nome completo"
         [ngClass]="{ 'is-invalid': submitted && hasError('nome') }"
       />
       <div
@@ -96,9 +96,9 @@
     <div class="col-md-4 mb-3">
       <select
         name=""
-        id="empresa_id"
+        id="empresaId"
         class="form-control"
-        formControlName="empresa_id"
+        formControlName="empresaId"
       >
         <option value="#" selected>Nenhuma empresa cadastrada...</option>
       </select>
@@ -109,9 +109,9 @@
     <div class="col-md-4 mb-3">
       <select
         name=""
-        id="empresa_id"
+        id="empresaId"
         class="form-control"
-        formControlName="empresa_id"
+        formControlName="empresaId"
       >
         <option *ngFor="let empresa of empresas" [value]="empresa.id">{{
           empresa.nome
