@@ -20,7 +20,6 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Cod.</th>
         <th scope="col">Nome</th>
         <th scope="col">Nascimento</th>
         <th scope="col">CPF</th>
@@ -30,7 +29,6 @@
 
     <tbody>
       <tr *ngFor="let funcionario of funcionarios">
-        <th scope="row">{{ funcionario.id }}</th>
         <td>{{ funcionario.nome }}</td>
         <td>{{ funcionario.dataNascimento }}</td>
         <td>{{ funcionario.cpf }}</td>
