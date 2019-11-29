@@ -26,9 +26,7 @@ export class FuncionariosService {
   }
 
   private update(funcionario) {
-    return this.http
-      .put(`${this.API}/${funcionario.id}`, funcionario)
-      .pipe(take(1));
+    return this.http.put(`${this.API}`, funcionario).pipe(take(1));
   }
 
   delete(id) {
@@ -37,6 +35,8 @@ export class FuncionariosService {
 
   save(funcionario) {
     if (funcionario.id) {
+      console.log(funcionario);
+
       return this.update(funcionario);
     } else {
       return this.create(funcionario);
