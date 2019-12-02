@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { tap, delay, take } from "rxjs/operators";
 
 import { Empresa } from "./empresa";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -12,11 +13,14 @@ export class EmpresasService {
 
   constructor(private http: HttpClient) {}
 
+  // metodo para pegar somente o id, nome e cnpj da empresa
+  list() {}
+
   find() {
     return this.http.get<Empresa[]>(this.API).pipe(tap());
   }
 
-  findById(id) {
+  findById(id): Observable<any> {
     return this.http.get<Empresa>(`${this.API}/${id}`).pipe(take(1));
   }
 
@@ -32,7 +36,7 @@ export class EmpresasService {
     return this.http.delete(`${this.API}/${id}`).pipe(take(1));
   }
 
-  save(empresa) {
+  save(empresa): Observable<any> {
     if (empresa.id) {
       return this.update(empresa);
     } else {

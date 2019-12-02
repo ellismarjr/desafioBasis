@@ -1,10 +1,112 @@
-<div class="container">
+<div id="content">
+  <header>
+    <strong>Gerenciamento de Empresas</strong>
+    <button type="button" (click)="openModal(cadEmpresa)">CADASTRAR</button>
+  </header>
+
+  <div
+    *ngIf="!isEmpty; then isNotEmptyEmpresa; else isEmptyEmpresa"
+    class="container"
+  ></div>
+</div>
+
+<ng-template #cadEmpresa>
+  <form class="needs-validation" novalidate [formGroup]="form">
+    <strong>Cadastro de Empresa</strong>
+    <input
+      type="text"
+      class="form-control"
+      id="nome"
+      formControlName="nome"
+      placeholder="Nome da empresa"
+    />
+    <input
+      type="text"
+      placeholder="Endereço"
+      class="form-control"
+      id="endereco"
+      formControlName="endereco"
+    />
+    <input
+      type="text"
+      placeholder="CNPJ"
+      class="form-control"
+      id="cnpj"
+      formControlName="cnpj"
+    />
+
+    <footer>
+      <button class="salvar" type="button" (click)="onSubmit()">
+        Salvar
+      </button>
+      <button class="sair" type="button" (click)="cadModalRef.hide()">
+        Fechar
+      </button>
+    </footer>
+  </form>
+</ng-template>
+
+<ng-template #editarModal>
+  <form class="needs-validation" novalidate [formGroup]="form">
+    <strong>Atualização de Empresa</strong>
+    <input
+      type="text"
+      placeholder="Nome da empresa"
+      type="text"
+      class="form-control"
+      id="nome"
+      formControlName="nome"
+    />
+    <input type="text" placeholder="Endereço" />
+    <input type="text" placeholder="CNPJ" />
+  </form>
+
+  <footer>
+    <button class="salvar" type="button" (click)="onSubmit()">
+      Salvar
+    </button>
+    <button class="sair" type="button" (click)="editarModalRef.hide()">
+      Fechar
+    </button>
+  </footer>
+</ng-template>
+
+<ng-template #isEmptyEmpresa>
+  <div class="alert alert-secondary" role="alert">
+    <h4 class="alert-heading"></h4>
+    <p>
+      Nenhuma empresa cadastrada até o momento!
+    </p>
+  </div>
+</ng-template>
+
+<ng-template #isNotEmptyEmpresa>
+  <ul>
+    <section *ngFor="let empresa of empresas">
+      <li (click)="onUpdate(empresa.id)">
+        <strong>{{ empresa.nome }}</strong>
+
+        <img src="../../assets/next.png" alt="" />
+      </li>
+    </section>
+    <footer>
+      <button type="button">Anterior</button>
+      <button type="button">Próxima</button>
+    </footer>
+  </ul>
+</ng-template>
+
+<!-- <div class="container">
   <ul class="list-group">
     <li class="list-group-item active">
       Empresas
-      <a [routerLink]="['/empresas/add']" routerLinkActive="router-link-active">
-        <button type="button" class="btn btn-info">Cadastrar</button>
-      </a>
+      <button
+        type="button"
+        class="btn btn-info"
+        (click)="openModal(cadEmpresa)"
+      >
+        Cadastrar
+      </button>
     </li>
     <div
       *ngIf="!isEmpty; then isNotEmptyEmpresa; else isEmptyEmpresa"
@@ -78,6 +180,81 @@
   </div>
 </ng-template>
 
+<ng-template #cadEmpresa>
+  <div class="modal-header">
+    <strong>Cadastro de Empresa</strong>
+  </div>
+  <div class="modal-body">
+    <form class="needs-validation" novalidate [formGroup]="form">
+      <div class="form-row">
+        <div class="col-lg-12">
+          <input
+            type="text"
+            class="form-control"
+            id="nome"
+            formControlName="nome"
+            placeholder="Nome da empresa"
+            [ngClass]="{ 'is-invalid': submitted && hasError('nome') }"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="hasError('nome') && hasError('nome')['required']"
+          >
+            Nome é obrigatório
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="hasError('nome') && hasError('nome')['maxlength']"
+          >
+            Nome precisa ter no máximo
+            {{ hasError("nome")["maxlength"].requiredLength }}
+          </div>
+        </div>
+
+        <div class="col-lg-12">
+          <input
+            type="text"
+            class="form-control"
+            id="endereco"
+            formControlName="endereco"
+            placeholder="Endereço da empresa"
+            [ngClass]="{ 'is-invalid': submitted && hasError('endereco') }"
+          />
+          <div class="invalid-feedback">
+            Endereço é obrigatório!
+          </div>
+        </div>
+
+        <div class="col-lg-12">
+          <input
+            type="text"
+            class="form-control"
+            id="cnpj"
+            formControlName="cnpj"
+            placeholder="CNPJ da empresa"
+            mask="{00.000.000/0000-00}"
+            [ngClass]="{ 'is-invalid': submitted && hasError('cnpj') }"
+          />
+          <div class="invalid-feedback">
+            CNPJ é obrigatório
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-success" (click)="onSubmit()">
+        Salvar
+      </button>
+      <button
+        type="button"
+        class="btn btn-default"
+        (click)="cadModalRef.hide()"
+      >
+        Fechar
+      </button>
+    </form>
+  </div>
+</ng-template>
+
 <div class="container">
   <router-outlet></router-outlet>
-</div>
+</div> -->

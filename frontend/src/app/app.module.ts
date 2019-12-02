@@ -13,11 +13,12 @@ import { HeaderComponent } from "./header/header.component";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { TooltipModule } from "ngx-bootstrap/tooltip";
 import { ModalModule } from "ngx-bootstrap/modal";
+import { NgxMaskModule, IConfig } from "ngx-mask";
+
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { EmpresasComponent } from "./empresas/empresas.component";
-import { CadEmpresasComponent } from "./empresas/cad-empresas/cad-empresas.component";
+import { EmpresaDetalheComponent } from "./empresas/empresa-detalhe/empresa-detalhe.component";
 import { FuncionariosComponent } from "./funcionarios/funcionarios.component";
-import { CadFuncionariosFormComponent } from "./funcionarios/cad-funcionarios-form/cad-funcionarios-form.component";
 
 import { EmpresasService } from "./empresas/empresas.service";
 import { FuncionariosService } from "./funcionarios/funcionarios.service";
@@ -28,9 +29,8 @@ import { FuncionariosService } from "./funcionarios/funcionarios.service";
     HeaderComponent,
     DashboardComponent,
     EmpresasComponent,
-    CadEmpresasComponent,
-    FuncionariosComponent,
-    CadFuncionariosFormComponent
+    EmpresaDetalheComponent,
+    FuncionariosComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +41,8 @@ import { FuncionariosService } from "./funcionarios/funcionarios.service";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgxMaskModule.forRoot()
   ],
   providers: [EmpresasService, FuncionariosService],
   bootstrap: [AppComponent]
