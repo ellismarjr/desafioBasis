@@ -1,11 +1,158 @@
 div {
+  max-width: 800px;
   margin: 20px auto;
+  height: 512px;
 }
 
-ul li button {
+header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+header strong {
+  font-size: 24px;
+  color: #444;
+}
+
+div header button {
+  width: 142px;
+  height: 36px;
+  background: #0b4c5f;
+  border: 0;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/*
+CSS BODY
+*/
+
+ul {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+ul section {
+  border: 0;
+  padding: 0;
+  height: 62px;
+  margin-bottom: 10px;
+}
+
+ul section li {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: #ccc;
+  border-radius: 4px;
+  height: 62px;
+  cursor: pointer;
+}
+
+ul li strong {
+  color: #333;
+  margin: 25px;
+  font-size: 18px;
+}
+
+ul li span {
+  color: #666;
+}
+
+ul section li span button {
+  border: 0;
+  margin-right: 8px;
+  width: 80px;
+  height: 34px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #fff;
+}
+
+ul section li span button.detalhes {
+  background: #0489b1;
+}
+
+ul section li span button.editar {
+  background: #dba901;
+}
+
+ul section li span button.excluir {
+  background: #ff0000;
+}
+
+/* FIM CSS BODY */
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  margin-bottom: 10px;
+}
+
+form strong {
+  align-self: center;
+  color: #444;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+form input {
+  background: rgba(0, 0, 0, 0.1);
   border: 0;
   border-radius: 4px;
-  margin-left: 40px;
-  font-size: 14px;
+  height: 40px;
+  padding: 0 15px;
+  color: #444;
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+footer button {
+  width: 142px;
+  height: 36px;
+  border: 0;
+  color: #fff;
+  border-radius: 4px;
   font-weight: bold;
+  margin-right: 10px;
+}
+
+footer button.salvar {
+  background: #088a08;
+}
+
+footer button.sair {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+ul footer {
+  display: flex;
+  justify-content: center;
+}
+
+ul footer button {
+  margin: 5px;
+  border: 0;
+  background: #0489b1;
+  width: 80px;
+  height: 34px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #fff;
+}
+
+form select {
+  margin-bottom: 10px;
 }

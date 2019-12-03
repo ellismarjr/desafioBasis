@@ -1,4 +1,4 @@
-export interface Funcionario {
+export class Funcionarios {
   id: number;
   nome: string;
   dataNascimento: string;
