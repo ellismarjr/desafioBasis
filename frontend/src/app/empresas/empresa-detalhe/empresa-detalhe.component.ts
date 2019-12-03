@@ -37,12 +37,12 @@ export class EmpresaDetalheComponent implements OnInit {
 
     this.form = this.fb.group({
       id: [empresa.id],
-      nome: [empresa.nome, [Validators.required, Validators.maxLength(250)]],
+      nome: [empresa.nome, [Validators.required, Validators.maxLength(200)]],
       endereco: [
         empresa.endereco,
-        [Validators.required, Validators.maxLength(250)]
+        [Validators.required, Validators.maxLength(200)]
       ],
-      cnpj: [empresa.cnpj, [Validators.required, Validators.maxLength(14)]]
+      cnpj: [empresa.cnpj, [Validators.required, Validators.maxLength(18)]]
     });
 
     this.getEmpresa(empresa.id);

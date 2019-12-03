@@ -41,12 +41,12 @@ export class EmpresasComponent implements OnInit {
 
     this.form = this.fb.group({
       id: [empresa.id],
-      nome: [empresa.nome, [Validators.required, Validators.maxLength(500)]],
+      nome: [empresa.nome, [Validators.required, Validators.maxLength(200)]],
       endereco: [
         empresa.endereco,
-        [Validators.required, Validators.maxLength(250)]
+        [Validators.required, Validators.maxLength(200)]
       ],
-      cnpj: [empresa.cnpj, [Validators.required, Validators.maxLength(14)]]
+      cnpj: [empresa.cnpj, [Validators.required, Validators.maxLength(18)]]
     });
   }
 
@@ -70,6 +70,7 @@ export class EmpresasComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    console.log(this.form.value);
 
     if (this.form.valid) {
       let msgSuccess = "Empresa cadastrada com sucesso!";
