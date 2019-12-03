@@ -72,7 +72,7 @@ section span {
 
 footer {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 footer a {
@@ -80,11 +80,10 @@ footer a {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #0b4c5f;
-  width: 80px;
-  height: 36px;
+  background: #999;
+  width: 60px;
+  height: 26px;
   color: #fff;
-  font-size: 18px;
   font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
