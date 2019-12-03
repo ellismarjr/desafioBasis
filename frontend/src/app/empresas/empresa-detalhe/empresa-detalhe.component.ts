@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { Empresa } from "../empresa";
+import { Funcionario } from "src/app/funcionarios/funcionarios";
 
 @Component({
   selector: "app-empresa-detalhe",
@@ -15,9 +16,11 @@ import { Empresa } from "../empresa";
 export class EmpresaDetalheComponent implements OnInit {
   form: FormGroup;
   empresas: Empresa[];
+  funcionarios: Funcionario[];
   submitted = false;
   excluirModalRef: BsModalRef;
   editarModalRef: BsModalRef;
+  showFuncionario = false;
   @ViewChild("excluirModal", { static: false }) excluirModal;
 
   empresaSelecionada: Empresa = new Empresa();
@@ -46,6 +49,7 @@ export class EmpresaDetalheComponent implements OnInit {
     });
 
     this.getEmpresa(empresa.id);
+    this.funcionarios = this.empresaSelecionada["funcionarios"];
   }
 
   hasError(field: string) {
@@ -125,7 +129,21 @@ export class EmpresaDetalheComponent implements OnInit {
   back() {
     this.location.back();
   }
-  // onDeclineDelete() {
-  //   this.deleteModalRef.hide();
-  // }
+
+  showFuncionarios() {
+    // this.funcionarioService.find().subscribe(funcionario => {
+    //   this.funcionarios = funcionario;
+    //   console.log(this.funcionarios);
+    // });
+
+    this.funcionarios = this.empresaSelecionada["funcionarios"];
+
+    if (!this.funcionarios.length) {
+      this.toastr.info(
+        "Não existem funcionários cadastrados para esta empresa!"
+      );
+    } else {
+      this.showFuncionario = !this.showFuncionario;
+    }
+  }
 }

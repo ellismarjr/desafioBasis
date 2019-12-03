@@ -29,10 +29,35 @@
     </span>
   </section>
 
+  <button class="funcionarios" (click)="showFuncionarios()">
+    Funcionários
+  </button>
+
   <footer>
     <a (click)="back()">Voltar</a>
   </footer>
+
+  <ul class="showFun" *ngIf="showFuncionario">
+    <section>
+      <p>Lista de Funcionários</p>
+
+      <li *ngFor="let funcionario of funcionarios">
+        <strong>{{ funcionario.nome }}</strong>
+        <img src="../../assets/next.png" alt="" />
+      </li>
+    </section>
+  </ul>
 </div>
+
+<ul *ngIf="!showFuncionarios">
+  <section>
+    <li>
+      <strong>Não existem funcionários cadastrados para esta empresa</strong>
+
+      <img src="../../assets/next.png" alt="" />
+    </li>
+  </section>
+</ul>
 
 <ng-template #editarModal>
   <form class="needs-validation" novalidate [formGroup]="form">

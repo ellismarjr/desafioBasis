@@ -66,7 +66,7 @@ section span {
 
 footer {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 footer a {
@@ -74,14 +74,20 @@ footer a {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #0b4c5f;
-  width: 80px;
-  height: 36px;
+  background: #999;
+  width: 60px;
+  height: 26px;
   color: #fff;
-  font-size: 18px;
   font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
+}
+
+button.funcionarios {
+  margin-top: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  width: 110px;
+  font-size: 14px;
 }
 
 form {
@@ -125,4 +131,34 @@ form footer button.salvar {
 
 form footer button.sair {
   background: rgba(0, 0, 0, 0.5);
+}
+
+div ul.showFun {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+div ul.showFun li {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: #58acfa;
+  border-radius: 4px;
+  height: 42px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+div ul.showFun li img {
+  width: 16px;
+  height: 16px;
+}
+
+div ul.showFun p {
+  font-weight: bold;
 }
