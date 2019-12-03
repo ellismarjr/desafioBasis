@@ -13,6 +13,29 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   styleUrls: ["./empresas.component.css"]
 })
 export class EmpresasComponent implements OnInit {
+  public myModel = "";
+  public mask = [
+    /[1-9]/,
+    /\d/,
+    /\d/,
+    ".",
+    /\d/,
+    /\d/,
+    /\d/,
+    ".",
+    /\d/,
+    /\d/,
+    /\d/,
+    "/",
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    "-",
+    /\d/,
+    /\d/
+  ];
+
   empresas: Empresa[];
   error$ = new Subject<boolean>();
   isEmpty = false;

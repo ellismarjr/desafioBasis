@@ -15,6 +15,24 @@ import { Empresa } from "../empresas/empresa";
   styleUrls: ["./funcionarios.component.css"]
 })
 export class FuncionariosComponent implements OnInit {
+  public myModel = "";
+  public mask = [
+    /[1-9]/,
+    /\d/,
+    /\d/,
+    ".",
+    /\d/,
+    /\d/,
+    /\d/,
+    ".",
+    /\d/,
+    /\d/,
+    /\d/,
+    "-",
+    /\d/,
+    /\d/
+  ];
+
   funcionarios: Funcionario[];
   empresas: Empresa[];
   error$ = new Subject<boolean>();

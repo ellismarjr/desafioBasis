@@ -29,10 +29,12 @@
     />
     <input
       type="text"
-      placeholder="CPF"
       class="form-control"
       id="cpf"
       formControlName="cpf"
+      placeholder="Ex. 000.000.000-00"
+      [textMask]="{ mask: mask }"
+      [(ngModel)]="myModel"
     />
 
     <select class="form-control" id="empresaId" formControlName="empresaId">
@@ -94,9 +96,9 @@
         <img src="../../assets/next.png" alt="" />
       </li>
     </section>
-    <footer>
+    <!-- <footer>
       <button type="button">Anterior</button>
       <button type="button">Próxima</button>
-    </footer>
+    </footer> -->
   </ul>
 </ng-template>

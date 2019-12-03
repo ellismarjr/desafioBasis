@@ -14,6 +14,27 @@ import { Funcionario } from "src/app/funcionarios/funcionarios";
   styleUrls: ["./empresa-detalhe.component.css"]
 })
 export class EmpresaDetalheComponent implements OnInit {
+  public mask = [
+    /[1-9]/,
+    /\d/,
+    ".",
+    /\d/,
+    /\d/,
+    /\d/,
+    ".",
+    /\d/,
+    /\d/,
+    /\d/,
+    "/",
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    "-",
+    /\d/,
+    /\d/
+  ];
+
   form: FormGroup;
   empresas: Empresa[];
   funcionarios: Funcionario[];

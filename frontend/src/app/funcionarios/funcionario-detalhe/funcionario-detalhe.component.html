@@ -58,11 +58,12 @@
       formControlName="dataNascimento"
     />
     <input
-      placeholder="cpf"
       type="text"
       class="form-control"
       id="cpf"
       formControlName="cpf"
+      placeholder="Ex. 000.000.000-00"
+      [textMask]="{ mask: mask }"
     />
 
     <select class="form-control" formControlName="empresaId" id="empresaId">
