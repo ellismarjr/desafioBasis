@@ -34,13 +34,8 @@
       id="cpf"
       formControlName="cpf"
     />
-    <select
-      name=""
-      id="empresaId"
-      class="form-control"
-      formControlName="empresaId"
-    >
-      <option value="" selected>Selecione a empresa</option>
+    <select class="form-control">
+      <option id="empresaId" value="" selected>Selecione..</option>
       <option *ngFor="let empresa of empresas" [value]="empresa.id">{{
         empresa.nome
       }}</option>
