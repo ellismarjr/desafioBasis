@@ -1,0 +1,106 @@
+<div>
+  <header>
+    <span class="nome">
+      <label for="">Nome:</label>
+      <h1>{{ funcionarioSelecionado.nome }}</h1>
+    </span>
+    <span class="buttons">
+      <button type="button" class="editar" (click)="openModal(editarModal)">
+        Editar
+      </button>
+      <button
+        type="button"
+        class="excluir"
+        (click)="onDelete(funcionarioSelecionado)"
+      >
+        Excluir
+      </button>
+    </span>
+  </header>
+
+  <section>
+    <span class="dataNascimento">
+      <label for="">Data de Nascimento:</label>
+      <p>
+        {{ funcionarioSelecionado.dataNascimento }}
+      </p>
+    </span>
+    <span class="cpf">
+      <label for="">CPF:</label>
+      <span>{{ funcionarioSelecionado.cpf }}</span>
+    </span>
+    <span class="empresa">
+      <label for="">Empresa:</label>
+      <span>{{ empresaSelecionada.nome }}</span>
+    </span>
+  </section>
+
+  <footer>
+    <a (click)="back()">Voltar</a>
+  </footer>
+</div>
+
+<ng-template #editarModal>
+  <form class="needs-validation" novalidate [formGroup]="form">
+    <strong>Atualização de Funcionário</strong>
+    <input
+      placeholder="Nome do Funcionário"
+      type="text"
+      class="form-control"
+      id="nome"
+      formControlName="nome"
+    />
+    <input
+      placeholder="dataNascimento"
+      type="date"
+      class="form-control"
+      id="dataNascimento"
+      formControlName="dataNascimento"
+    />
+    <input
+      placeholder="cpf"
+      type="text"
+      class="form-control"
+      id="cpf"
+      formControlName="cpf"
+    />
+
+    <select class="form-control" formControlName="empresaId" id="empresaId">
+      <option selected value="">{{ empresaSelecionada.nome }}</option>
+      <option *ngFor="let empresa of empresas" [value]="empresa.id">{{
+        empresa.nome
+      }}</option>
+    </select>
+
+    <footer>
+      <button class="salvar" type="button" (click)="onSubmit()">
+        Salvar
+      </button>
+      <button class="sair" type="button" (click)="editarModalRef.hide()">
+        Fechar
+      </button>
+    </footer>
+  </form>
+</ng-template>
+
+<ng-template #excluirModal>
+  <div class="excluir">
+    <p>Tem certeza que deseja excluir?</p>
+    <button
+      style="margin-right: 20px;"
+      type="button"
+      class="btn btn-danger"
+      (click)="onConfirmDelete()"
+    >
+      Sim
+    </button>
+    <span></span>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="excluirModalRef.hide()"
+    >
+      Não
+    </button>
+  </div>
+</ng-template>
