@@ -74,18 +74,6 @@ ul section li span button {
   color: #fff;
 }
 
-ul section li span button.detalhes {
-  background: #0489b1;
-}
-
-ul section li span button.editar {
-  background: #dba901;
-}
-
-ul section li span button.excluir {
-  background: #ff0000;
-}
-
 /* FIM CSS BODY */
 
 form {
