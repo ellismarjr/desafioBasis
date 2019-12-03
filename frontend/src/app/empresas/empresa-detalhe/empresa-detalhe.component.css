@@ -1,0 +1,128 @@
+div {
+  max-width: 800px;
+  background: #eee;
+  margin: 20px auto;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+div header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+div header span.nome {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+div section span.endereco {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 10px;
+  color: #222;
+}
+
+div header span.nome h1 {
+  font-size: 18px;
+  color: #444;
+  font-weight: bold;
+}
+
+button {
+  margin-right: 8px;
+  width: 80px;
+  height: 36px;
+  border: 0;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+button.editar {
+  background: #dba901;
+}
+
+button.excluir {
+  background: #ff0000;
+}
+
+section p {
+  color: #333;
+}
+
+section span {
+  color: #444;
+  font-weight: bold;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+}
+
+footer a {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0b4c5f;
+  width: 80px;
+  height: 36px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  margin-bottom: 10px;
+}
+
+form strong {
+  align-self: center;
+  color: #444;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+form input {
+  background: rgba(0, 0, 0, 0.1);
+  border: 0;
+  border-radius: 4px;
+  height: 40px;
+  padding: 0 15px;
+  color: #666;
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+form footer button {
+  width: 142px;
+  height: 36px;
+  border: 0;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+form footer button.salvar {
+  background: #088a08;
+}
+
+form footer button.sair {
+  background: rgba(0, 0, 0, 0.5);
+}

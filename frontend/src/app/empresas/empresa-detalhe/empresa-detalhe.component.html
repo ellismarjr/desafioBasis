@@ -1,0 +1,93 @@
+<div>
+  <header>
+    <span class="nome">
+      <label for="">Nome:</label>
+      <h1>{{ empresaSelecionada.nome }}</h1>
+    </span>
+    <span class="buttons">
+      <button type="button" class="editar" (click)="openModal(editarModal)">
+        Editar
+      </button>
+      <button
+        type="button"
+        class="excluir"
+        (click)="onDelete(empresaSelecionada)"
+      >
+        Excluir
+      </button>
+    </span>
+  </header>
+
+  <section>
+    <span class="endereco">
+      <label for="">Endereço:</label>
+      <p>{{ empresaSelecionada.endereco }}</p>
+    </span>
+    <span class="cnpj">
+      <label for="">CNPJ:</label>
+      <span>{{ empresaSelecionada.cnpj }}</span>
+    </span>
+  </section>
+
+  <footer>
+    <a (click)="back()">Voltar</a>
+  </footer>
+</div>
+
+<ng-template #editarModal>
+  <form class="needs-validation" novalidate [formGroup]="form">
+    <strong>Atualização de Empresa</strong>
+    <input
+      placeholder="Nome da empresa"
+      type="text"
+      class="form-control"
+      id="nome"
+      formControlName="nome"
+    />
+    <input
+      placeholder="Endereço"
+      type="text"
+      class="form-control"
+      id="endereco"
+      formControlName="endereco"
+    />
+    <input
+      placeholder="CNPJ"
+      type="text"
+      class="form-control"
+      id="cnpj"
+      formControlName="cnpj"
+    />
+
+    <footer>
+      <button class="salvar" type="button" (click)="onSubmit()">
+        Salvar
+      </button>
+      <button class="sair" type="button" (click)="editarModalRef.hide()">
+        Fechar
+      </button>
+    </footer>
+  </form>
+</ng-template>
+
+<ng-template #excluirModal>
+  <div class="excluir">
+    <p>Tem certeza que deseja excluir?</p>
+    <button
+      style="margin-right: 20px;"
+      type="button"
+      class="btn btn-danger"
+      (click)="onConfirmDelete()"
+    >
+      Sim
+    </button>
+    <span></span>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="excluirModalRef.hide()"
+    >
+      Não
+    </button>
+  </div>
+</ng-template>
