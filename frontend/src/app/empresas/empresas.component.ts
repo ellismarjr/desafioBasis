@@ -14,7 +14,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 })
 export class EmpresasComponent implements OnInit {
   empresas: Empresa[];
-  empresasOb$: Observable<Empresa[]>;
   error$ = new Subject<boolean>();
   isEmpty = false;
   form: FormGroup;
@@ -49,7 +48,6 @@ export class EmpresasComponent implements OnInit {
       ],
       cnpj: [empresa.cnpj, [Validators.required, Validators.maxLength(14)]]
     });
-    // this.onRefresh();
   }
 
   find() {
@@ -110,7 +108,6 @@ export class EmpresasComponent implements OnInit {
   onConfirmDelete() {
     this.empresaService.delete(this.empresaSelecionada.id).subscribe(
       success => {
-        // this.router.navigate(["/empresas"]);
         window.location.reload();
         this.deleteModalRef.hide();
         this.toastr.success("Empresa excluída com sucesso!");
