@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Empresa } from "src/app/empresas/empresa";
-import { Funcionarios } from "../funcionarios";
+import { Funcionario } from "../funcionarios";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { FuncionariosService } from "../funcionarios.service";
 import { ToastrService } from "ngx-toastr";
@@ -16,14 +16,13 @@ import { EmpresasService } from "src/app/empresas/empresas.service";
 })
 export class FuncionarioDetalheComponent implements OnInit {
   form: FormGroup;
-  funcionarios: Funcionarios[];
   empresas: Empresa[];
   submitted = false;
   excluirModalRef: BsModalRef;
   editarModalRef: BsModalRef;
   @ViewChild("excluirModal", { static: false }) excluirModal;
 
-  funcionarioSelecionado: Funcionarios = new Funcionarios();
+  funcionarioSelecionado: Funcionario = new Funcionario();
   empresaSelecionada: Empresa = new Empresa();
 
   constructor(

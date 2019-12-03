@@ -1,4 +1,4 @@
-export class Funcionarios {
+export class Funcionario {
   id: number;
   nome: string;
   dataNascimento: string;

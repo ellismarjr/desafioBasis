@@ -4,7 +4,7 @@ import { ToastrService } from "ngx-toastr";
 import { Router, ActivatedRoute } from "@angular/router";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { Observable, Subject } from "rxjs";
-import { Funcionarios } from "./funcionarios";
+import { Funcionario } from "./funcionarios";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { EmpresasService } from "../empresas/empresas.service";
 import { Empresa } from "../empresas/empresa";
@@ -15,7 +15,7 @@ import { Empresa } from "../empresas/empresa";
   styleUrls: ["./funcionarios.component.css"]
 })
 export class FuncionariosComponent implements OnInit {
-  funcionarios: Funcionarios[];
+  funcionarios: Funcionario[];
   empresas: Empresa[];
   error$ = new Subject<boolean>();
   isEmpty = true;
@@ -27,7 +27,7 @@ export class FuncionariosComponent implements OnInit {
   deleteModalRef: BsModalRef;
   @ViewChild("deleteModal", { static: false }) deleteModal;
 
-  funcionarioSelecionado: Funcionarios = new Funcionarios();
+  funcionarioSelecionado: Funcionario = new Funcionario();
 
   constructor(
     private funcionarioService: FuncionariosService,
@@ -84,7 +84,7 @@ export class FuncionariosComponent implements OnInit {
 
     if (this.formFunc.valid) {
       let msgSuccess = "Funcionário cadastrado com sucesso!";
-      let msgError = "Erro ao cadastrar empresa. Verifique seus dados!";
+      let msgError = "Erro ao cadastrar funcinário. Verifique seus dados!";
 
       if (this.formFunc.value.id) {
         msgSuccess = "Funcionário atualizado com sucesso!";
