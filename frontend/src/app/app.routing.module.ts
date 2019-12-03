@@ -5,9 +5,8 @@ import { EmpresasComponent } from "./empresas/empresas.component";
 import { EmpresaDetalheComponent } from "./empresas/empresa-detalhe/empresa-detalhe.component";
 import { EmpresaResolverGuard } from "./empresas/guards/empresa-resolver.guard";
 import { FuncionariosComponent } from "./funcionarios/funcionarios.component";
-import { CadFuncionariosFormComponent } from "./funcionarios/cad-funcionarios-form/cad-funcionarios-form.component";
+import { FuncionarioDetalheComponent } from "./funcionarios/funcionario-detalhe/funcionario-detalhe.component";
 import { funcionarioResolverGuard } from "./funcionarios/guards/funcionarios-resolver.guard";
-import { CadEmpresasComponent } from "./empresas/cad-empresas/cad-empresas.component";
 
 const routes: Routes = [
   {
@@ -33,6 +32,13 @@ const routes: Routes = [
   {
     path: "funcionarios",
     component: FuncionariosComponent,
+    resolve: {
+      funcionario: funcionarioResolverGuard
+    }
+  },
+  {
+    path: "funcionarios/detalhes/:id",
+    component: FuncionarioDetalheComponent,
     resolve: {
       funcionario: funcionarioResolverGuard
     }

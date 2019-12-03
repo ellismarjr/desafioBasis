@@ -19,6 +19,7 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { EmpresasComponent } from "./empresas/empresas.component";
 import { EmpresaDetalheComponent } from "./empresas/empresa-detalhe/empresa-detalhe.component";
 import { FuncionariosComponent } from "./funcionarios/funcionarios.component";
+import { FuncionarioDetalheComponent } from "./funcionarios/funcionario-detalhe/funcionario-detalhe.component";
 
 import { EmpresasService } from "./empresas/empresas.service";
 import { FuncionariosService } from "./funcionarios/funcionarios.service";
@@ -30,7 +31,8 @@ import { FuncionariosService } from "./funcionarios/funcionarios.service";
     DashboardComponent,
     EmpresasComponent,
     EmpresaDetalheComponent,
-    FuncionariosComponent
+    FuncionariosComponent,
+    FuncionarioDetalheComponent
   ],
   imports: [
     BrowserModule,
