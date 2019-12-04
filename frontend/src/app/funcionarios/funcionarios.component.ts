@@ -8,6 +8,7 @@ import { Funcionario } from "./funcionarios";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { EmpresasService } from "../empresas/empresas.service";
 import { Empresa } from "../empresas/empresa";
+import { myValidators } from "./validators";
 
 @Component({
   selector: "app-funcionarios",
@@ -32,6 +33,8 @@ export class FuncionariosComponent implements OnInit {
     /\d/,
     /\d/
   ];
+
+  validators: myValidators = new myValidators(this.toastr);
 
   funcionarios: Funcionario[];
   empresas: Empresa[];
@@ -66,13 +69,19 @@ export class FuncionariosComponent implements OnInit {
       id: [funcionario.id],
       nome: [
         funcionario.nome,
-        [Validators.required, Validators.maxLength(500)]
+        [Validators.required, Validators.maxLength(this.validators.nome)]
       ],
       dataNascimento: [
         funcionario.dataNascimento,
-        [Validators.required, Validators.maxLength(250)]
+        [
+          Validators.required,
+          Validators.maxLength(this.validators.dataNascimento)
+        ]
       ],
-      cpf: [funcionario.cpf, [Validators.required, Validators.maxLength(14)]],
+      cpf: [
+        funcionario.cpf,
+        [Validators.required, Validators.maxLength(this.validators.cpf)]
+      ],
       empresaId: [funcionario.empresaId, [Validators.required]]
     });
 
@@ -101,6 +110,10 @@ export class FuncionariosComponent implements OnInit {
     this.submitted = true;
 
     if (this.formFunc.valid) {
+      this.validators.validNome(this.formFunc.value.nome);
+      this.validators.validDataNascimento(this.formFunc.value.dataNascimento);
+      this.validators.validCpf(this.formFunc.value.cpf);
+      this.validators.validEmpresa(this.formFunc.value.empresaId);
       let msgSuccess = "Funcionário cadastrado com sucesso!";
       let msgError = "Erro ao cadastrar funcinário. Verifique seus dados!";
 
@@ -109,17 +122,24 @@ export class FuncionariosComponent implements OnInit {
         msgError = "Erro ao atualizar funcionário. Verifique seus dados!";
       }
 
-      this.funcionarioService.save(this.formFunc.value).subscribe(
-        funcionario => {
-          this.toastr.success(msgSuccess);
-          this.funcionarios.push(funcionario);
-          this.cadModalRef.hide();
-        },
-        error => {
-          this.toastr.error(msgError);
-          this.cadModalRef.hide();
-        }
-      );
+      if (this.validators.validations) {
+        this.funcionarioService.save(this.formFunc.value).subscribe(
+          funcionario => {
+            this.toastr.success(msgSuccess);
+            this.funcionarios.push(funcionario);
+            this.cadModalRef.hide();
+          },
+          error => {
+            this.toastr.error(msgError);
+            this.cadModalRef.hide();
+          }
+        );
+      }
+    } else {
+      this.validators.validNome(this.formFunc.value.nome);
+      this.validators.validDataNascimento(this.formFunc.value.dataNascimento);
+      this.validators.validCpf(this.formFunc.value.cpf);
+      this.validators.validEmpresa(this.formFunc.value.empresaId);
     }
   }
 

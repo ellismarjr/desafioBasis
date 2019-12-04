@@ -8,6 +8,7 @@ import { ToastrService } from "ngx-toastr";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { EmpresasService } from "src/app/empresas/empresas.service";
+import { myValidators } from "../validators";
 
 @Component({
   selector: "app-funcionario-detalhe",
@@ -31,6 +32,8 @@ export class FuncionarioDetalheComponent implements OnInit {
     /\d/,
     /\d/
   ];
+
+  validators: myValidators = new myValidators(this.toastr);
 
   form: FormGroup;
   empresas: Empresa[];
@@ -82,6 +85,10 @@ export class FuncionarioDetalheComponent implements OnInit {
     this.submitted = true;
 
     if (this.form.valid) {
+      this.validators.validNome(this.form.value.nome);
+      this.validators.validDataNascimento(this.form.value.dataNascimento);
+      this.validators.validCpf(this.form.value.cpf);
+      this.validators.validEmpresa(this.form.value.empresaId);
       let msgSuccess = "Funcionário cadastrado com sucesso!";
       let msgError = "Erro ao cadastrar empresa. Verifique seus dados!";
 
@@ -90,17 +97,24 @@ export class FuncionarioDetalheComponent implements OnInit {
         msgError = "Erro ao atualizar empresa. Verifique seus dados!";
       }
 
-      this.funcionarioService.save(this.form.value).subscribe(
-        funcionario => {
-          this.editarModalRef.hide();
-          this.funcionarioSelecionado = funcionario;
-          this.toastr.success(msgSuccess);
-        },
-        error => {
-          this.onCancel();
-          this.toastr.error(msgError);
-        }
-      );
+      if (this.validators.validations) {
+        this.funcionarioService.save(this.form.value).subscribe(
+          funcionario => {
+            this.editarModalRef.hide();
+            this.funcionarioSelecionado = funcionario;
+            this.toastr.success(msgSuccess);
+          },
+          error => {
+            this.onCancel();
+            this.toastr.error(msgError);
+          }
+        );
+      }
+    } else {
+      this.validators.validNome(this.form.value.nome);
+      this.validators.validDataNascimento(this.form.value.dataNascimento);
+      this.validators.validCpf(this.form.value.cpf);
+      this.validators.validEmpresa(this.form.value.empresaId);
     }
 
     this.getEmpresaId(this.form.value.empresaId);
