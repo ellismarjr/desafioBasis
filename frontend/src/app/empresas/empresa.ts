@@ -3,4 +3,5 @@ export class Empresa {
   nome: string;
   endereco: string;
   cnpj: string;
+  funcionarios: [];
 }

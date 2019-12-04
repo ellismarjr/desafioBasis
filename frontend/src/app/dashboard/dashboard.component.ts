@@ -1,15 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { Empresa } from "../empresas/empresa";
+import { EmpresasService } from "../empresas/empresas.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: "app-dashboard",
+  templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
+  empresas: Empresa[];
 
-  constructor() { }
+  constructor(
+    private empresaService: EmpresasService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
+    this.loadEmpresas();
   }
 
+  loadEmpresas() {
+    this.empresaService.find().subscribe(
+      res => {
+        this.empresas = res;
+        console.table(this.empresas);
+      },
+      error =>
+        this.toastr.error(
+          "Erro ao carregar lista de empresas. Tente novamente mais tarde!"
+        )
+    );
+  }
 }
