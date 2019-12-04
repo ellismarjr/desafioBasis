@@ -177,7 +177,7 @@ export class FuncionariosComponent implements OnInit {
       },
       error =>
         this.toastr.error(
-          "Erro ao carregar lista de empresas. Tente novamente mais tarde!"
+          "Erro ao carregar lista de funcionários. Tente novamente mais tarde!"
         )
     );
   }
