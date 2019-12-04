@@ -36,7 +36,7 @@ export class EmpresasComponent implements OnInit {
     /\d/
   ];
 
-  validators: myValidators;
+  validators: myValidators = new myValidators(this.toastr);
 
   empresas: Empresa[];
   error$ = new Subject<boolean>();
@@ -103,6 +103,11 @@ export class EmpresasComponent implements OnInit {
     this.submitted = true;
 
     if (this.form.valid) {
+      this.validators.validNome(this.form.value.nome);
+      this.validators.validEndereco(this.form.value.endereco);
+      this.validators.validCnpj(this.form.value.cnpj);
+      console.log(this.form.value.cnpj.length);
+
       let msgSuccess = "Empresa cadastrada com sucesso!";
       let msgError = "Erro ao cadastrar empresa. Verifique seus dados!";
 
@@ -111,17 +116,23 @@ export class EmpresasComponent implements OnInit {
         msgError = "Erro ao atualizar empresa. Verifique seus dados!";
       }
 
-      this.empresaService.save(this.form.value).subscribe(
-        empresa => {
-          this.toastr.success(msgSuccess);
-          this.empresas.push(empresa);
-          this.cadModalRef.hide();
-        },
-        error => {
-          this.toastr.error(msgError);
-          this.cadModalRef.hide();
-        }
-      );
+      if (this.validators.validations) {
+        this.empresaService.save(this.form.value).subscribe(
+          empresa => {
+            this.toastr.success(msgSuccess);
+            this.empresas.push(empresa);
+            this.cadModalRef.hide();
+          },
+          error => {
+            this.toastr.error(msgError);
+            this.cadModalRef.hide();
+          }
+        );
+      }
+    } else {
+      this.validators.validNome(this.form.value.nome);
+      this.validators.validEndereco(this.form.value.endereco);
+      this.validators.validCnpj(this.form.value.cnpj);
     }
   }
 

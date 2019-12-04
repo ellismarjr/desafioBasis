@@ -7,6 +7,7 @@ import { Location } from "@angular/common";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { Empresa } from "../empresa";
 import { Funcionario } from "src/app/funcionarios/funcionarios";
+import { myValidators } from "../validators";
 
 @Component({
   selector: "app-empresa-detalhe",
@@ -34,6 +35,8 @@ export class EmpresaDetalheComponent implements OnInit {
     /\d/,
     /\d/
   ];
+
+  validators: myValidators = new myValidators(this.toastr);
 
   form: FormGroup;
   empresas: Empresa[];
@@ -79,7 +82,12 @@ export class EmpresaDetalheComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+
     if (this.form.valid) {
+      this.validators.validNome(this.form.value.nome);
+      this.validators.validEndereco(this.form.value.endereco);
+      this.validators.validCnpj(this.form.value.cnpj);
+
       let msgSuccess = "Empresa cadastrada com sucesso!";
       let msgError = "Erro ao cadastrar empresa. Verifique seus dados!";
 
@@ -88,17 +96,23 @@ export class EmpresaDetalheComponent implements OnInit {
         msgError = "Erro ao atualizar empresa. Verifique seus dados!";
       }
 
-      this.empresaService.save(this.form.value).subscribe(
-        empresa => {
-          this.editarModalRef.hide();
-          this.empresaSelecionada = empresa;
-          this.toastr.success(msgSuccess);
-        },
-        error => {
-          this.onCancel();
-          this.toastr.error(msgError);
-        }
-      );
+      if (this.validators.validations) {
+        this.empresaService.save(this.form.value).subscribe(
+          empresa => {
+            this.editarModalRef.hide();
+            this.empresaSelecionada = empresa;
+            this.toastr.success(msgSuccess);
+          },
+          error => {
+            this.onCancel();
+            this.toastr.error(msgError);
+          }
+        );
+      }
+    } else {
+      this.validators.validNome(this.form.value.nome);
+      this.validators.validEndereco(this.form.value.endereco);
+      this.validators.validCnpj(this.form.value.cnpj);
     }
   }
 
@@ -152,11 +166,6 @@ export class EmpresaDetalheComponent implements OnInit {
   }
 
   showFuncionarios() {
-    // this.funcionarioService.find().subscribe(funcionario => {
-    //   this.funcionarios = funcionario;
-    //   console.log(this.funcionarios);
-    // });
-
     this.funcionarios = this.empresaSelecionada["funcionarios"];
 
     if (!this.funcionarios.length) {
