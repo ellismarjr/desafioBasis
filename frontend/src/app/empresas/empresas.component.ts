@@ -6,6 +6,7 @@ import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { ToastrService } from "ngx-toastr";
 import { empty, Observable, Subject } from "rxjs";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { myValidators } from "./validators";
 
 @Component({
   selector: "app-empresas",
@@ -16,7 +17,6 @@ export class EmpresasComponent implements OnInit {
   public myModel = "";
   public mask = [
     /[1-9]/,
-    /\d/,
     /\d/,
     ".",
     /\d/,
@@ -35,6 +35,8 @@ export class EmpresasComponent implements OnInit {
     /\d/,
     /\d/
   ];
+
+  validators: myValidators;
 
   empresas: Empresa[];
   error$ = new Subject<boolean>();
@@ -64,12 +66,18 @@ export class EmpresasComponent implements OnInit {
 
     this.form = this.fb.group({
       id: [empresa.id],
-      nome: [empresa.nome, [Validators.required, Validators.maxLength(200)]],
+      nome: [
+        empresa.nome,
+        [Validators.required, Validators.maxLength(this.validators.nome)]
+      ],
       endereco: [
         empresa.endereco,
-        [Validators.required, Validators.maxLength(200)]
+        [Validators.required, Validators.maxLength(this.validators.endereco)]
       ],
-      cnpj: [empresa.cnpj, [Validators.required, Validators.maxLength(18)]]
+      cnpj: [
+        empresa.cnpj,
+        [Validators.required, Validators.maxLength(this.validators.cnpj)]
+      ]
     });
   }
 
@@ -93,7 +101,6 @@ export class EmpresasComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    console.log(this.form.value);
 
     if (this.form.valid) {
       let msgSuccess = "Empresa cadastrada com sucesso!";
