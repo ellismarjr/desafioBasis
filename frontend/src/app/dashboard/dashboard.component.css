@@ -1,0 +1,36 @@
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 15px;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  background: #e24515;
+  border-radius: 4px;
+  width: fit-content;
+  padding: 8px;
+  width: 320px;
+}
+
+header {
+  font-size: 20px;
+  color: #eee;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}

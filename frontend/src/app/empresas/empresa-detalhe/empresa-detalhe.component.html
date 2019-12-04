@@ -1,4 +1,4 @@
-<div>
+<div class="content">
   <header>
     <span class="nome">
       <label for="">Nome:</label>
@@ -97,8 +97,31 @@
 </ng-template>
 
 <ng-template #excluirModal>
-  <div class="excluir">
-    <p>Tem certeza que deseja excluir?</p>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Tem certeza que deseja excluir?</h5>
+    </div>
+
+    <div class="modal-footer">
+      <button
+        style="margin-right: 20px;"
+        type="button"
+        class="btn btn-danger"
+        (click)="onConfirmDelete()"
+      >
+        Sim
+      </button>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="excluirModalRef.hide()"
+      >
+        Não
+      </button>
+    </div>
+  </div>
+  <!-- <div class="excluir">
+    <p></p>
     <button
       style="margin-right: 20px;"
       type="button"
@@ -107,7 +130,6 @@
     >
       Sim
     </button>
-    <span></span>
     <button
       type="button"
       class="btn btn-secondary"
@@ -115,5 +137,5 @@
     >
       Não
     </button>
-  </div>
+  </div> -->
 </ng-template>

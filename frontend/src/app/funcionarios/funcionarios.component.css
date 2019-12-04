@@ -48,14 +48,19 @@ ul section li {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background: #ccc;
+  background: #ec744f;
   border-radius: 4px;
   height: 62px;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+ul section li:hover {
+  background: #ff5722;
 }
 
 ul li strong {
-  color: #333;
+  color: #eee;
   margin: 25px;
   font-size: 18px;
 }

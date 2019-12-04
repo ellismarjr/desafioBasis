@@ -1,6 +1,6 @@
-div {
+div.content {
   max-width: 900px;
-  background: #eee;
+  background: #ec744f;
   margin: 20px auto;
   border-radius: 4px;
   padding: 10px;
@@ -38,7 +38,7 @@ label {
 
 div header span.nome h1 {
   font-size: 18px;
-  color: #444;
+  color: #eee;
   font-weight: bold;
 }
 
@@ -62,11 +62,11 @@ button.excluir {
 }
 
 section p {
-  color: #333;
+  color: #eee;
 }
 
 section span {
-  color: #444;
+  color: #eee;
   font-weight: bold;
 }
 
@@ -80,7 +80,7 @@ footer a {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #999;
+  background: rgba(0, 0, 0, 0.3);
   width: 60px;
   height: 26px;
   color: #fff;
@@ -134,4 +134,10 @@ form footer button.salvar {
 
 form footer button.sair {
   background: rgba(0, 0, 0, 0.5);
+}
+
+div.modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
