@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { tap, delay, take } from "rxjs/operators";
 
-import { Funcionarios } from "./funcionarios";
+import { Funcionario } from "./funcionarios";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -14,11 +14,11 @@ export class FuncionariosService {
   constructor(private http: HttpClient) {}
 
   find() {
-    return this.http.get<Funcionarios[]>(this.API).pipe(tap());
+    return this.http.get<Funcionario[]>(this.API).pipe(tap());
   }
 
   findById(id): Observable<any> {
-    return this.http.get<Funcionarios>(`${this.API}/${id}`).pipe(take(1));
+    return this.http.get<Funcionario>(`${this.API}/${id}`).pipe(take(1));
   }
 
   private create(funcionario) {
