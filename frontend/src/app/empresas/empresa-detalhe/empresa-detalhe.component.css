@@ -157,6 +157,10 @@ div ul.showFun li {
   margin-bottom: 8px;
 }
 
+div ul.showFun li:hover {
+  background: #ff5722;
+}
+
 div ul.showFun li img {
   width: 16px;
   height: 16px;
