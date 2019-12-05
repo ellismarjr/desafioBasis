@@ -3,6 +3,8 @@ package com.desafiobasis.com.desafiobasis.Controllers;
 import com.desafiobasis.com.desafiobasis.Models.Empresa;
 import com.desafiobasis.com.desafiobasis.Models.Funcionario;
 import com.desafiobasis.com.desafiobasis.Models.dto.FuncionarioDTO;
+import com.desafiobasis.com.desafiobasis.Models.dto.FuncionarioListagemDTO;
+import com.desafiobasis.com.desafiobasis.Models.mapper.FuncionarioListagemMapper;
 import com.desafiobasis.com.desafiobasis.Models.mapper.FuncionarioMapper;
 import com.desafiobasis.com.desafiobasis.Repository.EmpresaRepository;
 import com.desafiobasis.com.desafiobasis.Repository.FuncionarioRepository;
@@ -24,6 +26,9 @@ public class FuncionarioController {
     FuncionarioMapper funcionarioMapper;
 
     @Autowired
+    FuncionarioListagemMapper funcionarioListagemMapper;
+
+    @Autowired
     FuncionarioRepository funcionarioRepository;
 
     @Autowired
@@ -31,18 +36,18 @@ public class FuncionarioController {
 
 
 
-//    @RequestMapping(value = "/funcionarios", method = RequestMethod.GET ,produces= MediaType.APPLICATION_JSON_VALUE)
     @GetMapping("/funcionarios")
-    public List<Funcionario> find() {
-        List<Funcionario> funcionario = funcionarioRepository.findAll();
-        return funcionario;
+    public List<FuncionarioListagemDTO> find() {
+        List<FuncionarioListagemDTO> funcionarioListagemDTO = funcionarioListagemMapper.toDto(funcionarioRepository.findAll());
+        return funcionarioListagemDTO;
     }
 
     @GetMapping("/funcionarios/{id}")
     @ResponseBody
-    public Funcionario show(@PathVariable(value = "id" ) long id) {
+    public FuncionarioDTO show(@PathVariable(value = "id" ) long id) {
+
         Funcionario funcionario = funcionarioRepository.findById(id);
-        return funcionario;
+        return funcionarioMapper.toDto(funcionario);
     }
 
     @PostMapping("/funcionarios")
