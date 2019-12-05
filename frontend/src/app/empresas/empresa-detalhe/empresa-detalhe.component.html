@@ -41,7 +41,10 @@
     <section>
       <p>Lista de Funcionários</p>
 
-      <li *ngFor="let funcionario of funcionarios">
+      <li
+        (click)="goToFuncionario(funcionario.id)"
+        *ngFor="let funcionario of funcionarios"
+      >
         <strong>{{ funcionario.nome }}</strong>
         <img src="../../assets/next.png" alt="" />
       </li>

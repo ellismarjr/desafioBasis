@@ -176,4 +176,8 @@ export class EmpresaDetalheComponent implements OnInit {
       this.showFuncionario = !this.showFuncionario;
     }
   }
+
+  goToFuncionario(id) {
+    this.router.navigate(["funcionarios/detalhes", id]);
+  }
 }
