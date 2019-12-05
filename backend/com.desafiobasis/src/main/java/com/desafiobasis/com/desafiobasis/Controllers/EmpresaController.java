@@ -2,6 +2,8 @@ package com.desafiobasis.com.desafiobasis.Controllers;
 
 import com.desafiobasis.com.desafiobasis.Models.Empresa;
 import com.desafiobasis.com.desafiobasis.Models.dto.EmpresaDTO;
+import com.desafiobasis.com.desafiobasis.Models.dto.EmpresaListagemDTO;
+import com.desafiobasis.com.desafiobasis.Models.mapper.EmpresaListagemMapper;
 import com.desafiobasis.com.desafiobasis.Models.mapper.EmpresaMapper;
 import com.desafiobasis.com.desafiobasis.Repository.EmpresaRepository;
 import com.desafiobasis.com.desafiobasis.error.ResourceNotFoundException;
@@ -21,11 +23,22 @@ public class EmpresaController {
     EmpresaMapper empresaMapper;
 
     @Autowired
+    EmpresaListagemMapper empresaListagemMapper;
+
+    @Autowired
     EmpresaRepository empresaRepository;
 
     @GetMapping("/empresas")
     @ResponseBody
-    public List<Empresa> find() {
+    public List<EmpresaListagemDTO> find() {
+        List<EmpresaListagemDTO> empresaListagemDTO = empresaListagemMapper.toDto(this.empresaRepository.findAll());
+        return empresaListagemDTO;
+    }
+
+
+    @GetMapping("/empresas/all")
+    @ResponseBody
+    public List<Empresa> findAll() {
         return empresaRepository.findAll();
     }
 

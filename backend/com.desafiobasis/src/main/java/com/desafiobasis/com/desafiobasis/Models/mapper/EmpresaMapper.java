@@ -10,4 +10,6 @@ public interface EmpresaMapper {
     Empresa toEntity(EmpresaDTO dto);
 
     EmpresaDTO toDto(Empresa entity);
+
+
 }
