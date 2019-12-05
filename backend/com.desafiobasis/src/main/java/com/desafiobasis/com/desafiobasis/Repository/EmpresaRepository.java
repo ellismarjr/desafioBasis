@@ -6,4 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
 
     Empresa findById(long Id);
+
+
+//    List<EmpresaListagemDTO> getAll();
 }
