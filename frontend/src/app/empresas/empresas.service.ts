@@ -16,6 +16,10 @@ export class EmpresasService {
   // metodo para pegar somente o id, nome e cnpj da empresa
   list() {}
 
+  findAll() {
+    return this.http.get<Empresa[]>(`${this.API}/all`).pipe(tap());
+  }
+
   find() {
     return this.http.get<Empresa[]>(this.API).pipe(tap());
   }
