@@ -6,9 +6,10 @@ import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { FuncionariosService } from "../funcionarios.service";
 import { ToastrService } from "ngx-toastr";
 import { Router, ActivatedRoute } from "@angular/router";
-import { Location } from "@angular/common";
+import { Location, DatePipe } from "@angular/common";
 import { EmpresasService } from "src/app/empresas/empresas.service";
 import { myValidators } from "../validators";
+import { DateUtil } from "../../util/dateUtil";
 
 @Component({
   selector: "app-funcionario-detalhe",
@@ -34,6 +35,7 @@ export class FuncionarioDetalheComponent implements OnInit {
   ];
 
   validators: myValidators = new myValidators(this.toastr);
+  dateUtil: DateUtil = new DateUtil(this.datePipe);
 
   form: FormGroup;
   empresas: Empresa[];
@@ -53,7 +55,8 @@ export class FuncionarioDetalheComponent implements OnInit {
     private bsModalService: BsModalService,
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit() {
@@ -139,6 +142,9 @@ export class FuncionarioDetalheComponent implements OnInit {
   getFuncionario(id) {
     this.funcionarioService.findById(id).subscribe(funcionario => {
       this.funcionarioSelecionado = funcionario;
+      this.funcionarioSelecionado.dataNascimento = this.dateUtil.formatDate(
+        this.funcionarioSelecionado.dataNascimento
+      );
     });
   }
 
