@@ -48,7 +48,7 @@ export class EmpresasComponent implements OnInit {
   editarModalRef: BsModalRef;
   @ViewChild("deleteModal", { static: false }) deleteModal;
 
-  empresaSelecionada: Empresa;
+  empresaSelecionada: Empresa = new Empresa();
 
   constructor(
     private empresaService: EmpresasService,
@@ -106,7 +106,6 @@ export class EmpresasComponent implements OnInit {
       this.validators.validNome(this.form.value.nome);
       this.validators.validEndereco(this.form.value.endereco);
       this.validators.validCnpj(this.form.value.cnpj);
-      console.log(this.form.value.cnpj.length);
 
       let msgSuccess = "Empresa cadastrada com sucesso!";
       let msgError = "Erro ao cadastrar empresa. Verifique seus dados!";
