@@ -21,10 +21,9 @@ export class DashboardComponent implements OnInit {
   }
 
   loadEmpresas() {
-    this.empresaService.find().subscribe(
+    this.empresaService.findAll().subscribe(
       res => {
         this.empresas = res;
-        console.table(this.empresas);
       },
       error =>
         this.toastr.error(
