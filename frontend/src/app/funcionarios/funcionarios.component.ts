@@ -128,6 +128,7 @@ export class FuncionariosComponent implements OnInit {
             this.toastr.success(msgSuccess);
             this.funcionarios.push(funcionario);
             this.cadModalRef.hide();
+            this.formFunc.reset();
           },
           error => {
             this.toastr.error(msgError);
