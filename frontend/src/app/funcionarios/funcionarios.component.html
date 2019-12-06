@@ -11,7 +11,12 @@
 </div>
 
 <ng-template #cadEmpresa>
-  <form class="needs-validation" novalidate [formGroup]="formFunc">
+  <form
+    autocomplete="off"
+    class="needs-validation"
+    novalidate
+    [formGroup]="formFunc"
+  >
     <strong>Cadastro de Funcionário</strong>
     <input
       type="text"
@@ -55,7 +60,12 @@
 </ng-template>
 
 <ng-template #editarModal>
-  <form class="needs-validation" novalidate [formGroup]="formFunc">
+  <form
+    autocomplete="off"
+    class="needs-validation"
+    novalidate
+    [formGroup]="formFunc"
+  >
     <strong>Atualização de Funcionários</strong>
     <input
       type="text"

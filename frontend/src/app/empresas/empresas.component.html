@@ -11,7 +11,12 @@
 </div>
 
 <ng-template #cadEmpresa>
-  <form class="needs-validation" novalidate [formGroup]="form">
+  <form
+    autocomplete="off"
+    class="needs-validation"
+    novalidate
+    [formGroup]="form"
+  >
     <strong>Cadastro de Empresa</strong>
     <input
       type="text"

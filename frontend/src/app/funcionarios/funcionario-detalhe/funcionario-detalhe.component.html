@@ -41,7 +41,12 @@
 </div>
 
 <ng-template #editarModal>
-  <form class="needs-validation" novalidate [formGroup]="form">
+  <form
+    autocomplete="off"
+    class="needs-validation"
+    novalidate
+    [formGroup]="form"
+  >
     <strong>Atualização de Funcionário</strong>
     <input
       placeholder="Nome do Funcionário"
