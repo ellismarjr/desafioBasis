@@ -4,6 +4,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { TextMaskModule } from "angular2-text-mask";
 import { DatePipe } from "@angular/common";
+import { SidebarModule } from "primeng/sidebar";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";
@@ -47,7 +48,8 @@ import { FuncionariosService } from "./funcionarios/funcionarios.service";
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
     NgxMaskModule.forRoot(),
-    TextMaskModule
+    TextMaskModule,
+    SidebarModule
   ],
   providers: [EmpresasService, FuncionariosService, DatePipe],
   bootstrap: [AppComponent]
