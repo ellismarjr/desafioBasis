@@ -104,7 +104,11 @@ export class FuncionarioDetalheComponent implements OnInit {
         this.funcionarioService.save(this.form.value).subscribe(
           funcionario => {
             this.editarModalRef.hide();
+
             this.funcionarioSelecionado = funcionario;
+            this.funcionarioSelecionado.dataNascimento = this.dateUtil.formatDate(
+              funcionario.dataNascimento
+            );
             this.toastr.success(msgSuccess);
           },
           error => {
