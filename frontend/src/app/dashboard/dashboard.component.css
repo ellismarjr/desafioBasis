@@ -22,6 +22,7 @@ li {
   width: fit-content;
   padding: 8px;
   width: 320px;
+  cursor: pointer;
 }
 
 header {

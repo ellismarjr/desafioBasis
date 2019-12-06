@@ -1,6 +1,6 @@
 <div>
   <ul>
-    <li *ngFor="let empresa of empresas">
+    <li *ngFor="let empresa of empresas" (click)="gotToEmpresa(empresa.id)">
       <header>{{ empresa.nome }}</header>
       <p><strong>Funcionários:</strong> {{ empresa.funcionarios.length }}</p>
     </li>

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Empresa } from "../empresas/empresa";
 import { EmpresasService } from "../empresas/empresas.service";
 import { ToastrService } from "ngx-toastr";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-dashboard",
@@ -13,7 +14,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private empresaService: EmpresasService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -30,5 +32,9 @@ export class DashboardComponent implements OnInit {
           "Erro ao carregar lista de empresas. Tente novamente mais tarde!"
         )
     );
+  }
+
+  gotToEmpresa(id) {
+    this.router.navigate(["empresas/detalhes", id]);
   }
 }
