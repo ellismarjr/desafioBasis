@@ -4,10 +4,20 @@
     <button type="button" (click)="openModal(cadEmpresa)">CADASTRAR</button>
   </header>
 
-  <div
-    *ngIf="!isEmpty; then isNotEmptyEmpresa; else isEmptyEmpresa"
-    class="container"
-  ></div>
+  <div class="container">
+    <ul>
+      <section *ngFor="let funcionario of funcionarios">
+        <li (click)="onUpdate(funcionario.id)">
+          <strong>{{ funcionario.nome }}</strong>
+          <img src="../../assets/next.png" alt="" />
+        </li>
+      </section>
+      <!-- <footer>
+      <button type="button">Anterior</button>
+      <button type="button">Próxima</button>
+    </footer> -->
+    </ul>
+  </div>
 </div>
 
 <ng-template #cadEmpresa>
@@ -68,17 +78,4 @@
   </div>
 </ng-template>
 
-<ng-template #isNotEmptyEmpresa>
-  <ul>
-    <section *ngFor="let funcionario of funcionarios">
-      <li (click)="onUpdate(funcionario.id)">
-        <strong>{{ funcionario.nome }}</strong>
-        <img src="../../assets/next.png" alt="" />
-      </li>
-    </section>
-    <!-- <footer>
-      <button type="button">Anterior</button>
-      <button type="button">Próxima</button>
-    </footer> -->
-  </ul>
-</ng-template>
+<ng-template #isNotEmptyEmpresa> </ng-template>

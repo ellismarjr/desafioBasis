@@ -4,10 +4,21 @@
     <button type="button" (click)="openModal(cadEmpresa)">CADASTRAR</button>
   </header>
 
-  <div
-    *ngIf="!isEmpty; then isNotEmptyEmpresa; else isEmptyEmpresa"
-    class="container"
-  ></div>
+  <div class="container">
+    <ul>
+      <section *ngFor="let empresa of empresas">
+        <li (click)="onUpdate(empresa.id)">
+          <strong>{{ empresa.nome }}</strong>
+
+          <img src="../../assets/next.png" alt="" />
+        </li>
+      </section>
+      <!-- <footer>
+      <button type="button">Anterior</button>
+      <button type="button">Próxima</button>
+    </footer> -->
+    </ul>
+  </div>
 </div>
 
 <ng-template #cadEmpresa>
@@ -53,27 +64,10 @@
   </form>
 </ng-template>
 
-<ng-template #isEmptyEmpresa>
-  <div class="alert alert-secondary" role="alert">
-    <h4 class="alert-heading"></h4>
-    <p>
-      Nenhuma empresa cadastrada até o momento!
-    </p>
+<!-- <ng-template #isEmptyEmpresa>
+  <div class="empresas-empty">
+    <strong>Nenhuma empresa cadastrada até o momento</strong>
   </div>
-</ng-template>
+</ng-template> -->
 
-<ng-template #isNotEmptyEmpresa>
-  <ul>
-    <section *ngFor="let empresa of empresas">
-      <li (click)="onUpdate(empresa.id)">
-        <strong>{{ empresa.nome }}</strong>
-
-        <img src="../../assets/next.png" alt="" />
-      </li>
-    </section>
-    <!-- <footer>
-      <button type="button">Anterior</button>
-      <button type="button">Próxima</button>
-    </footer> -->
-  </ul>
-</ng-template>
+<ng-template #isNotEmptyEmpresa> </ng-template>
