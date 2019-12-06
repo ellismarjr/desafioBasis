@@ -59,36 +59,6 @@
   </form>
 </ng-template>
 
-<ng-template #editarModal>
-  <form
-    autocomplete="off"
-    class="needs-validation"
-    novalidate
-    [formGroup]="formFunc"
-  >
-    <strong>Atualização de Funcionários</strong>
-    <input
-      type="text"
-      placeholder="Nome da empresa"
-      type="text"
-      class="form-control"
-      id="nome"
-      formControlName="nome"
-    />
-    <input type="text" placeholder="Endereço" />
-    <input type="text" placeholder="CNPJ" />
-  </form>
-
-  <footer>
-    <button class="salvar" type="button" (click)="onSubmit()">
-      Salvar
-    </button>
-    <button class="sair" type="button" (click)="editarModalRef.hide()">
-      Fechar
-    </button>
-  </footer>
-</ng-template>
-
 <ng-template #isEmptyEmpresa>
   <div class="alert alert-secondary" role="alert">
     <h4 class="alert-heading"></h4>
