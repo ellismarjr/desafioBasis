@@ -1,29 +1,19 @@
-<!-- <header>
+<header>
+  <button
+    type="text"
+    (click)="display = true"
+    pButton
+    icon="pi pi-list"
+    class="ui-button-danger"
+    label="MENU"
+  ></button>
   <nav>
-    <ul>
-      <li>
-        <a [routerLink]="['']">
-          <img src="../../assets//logo.png" alt="" srcset="" />
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="['/empresas']" routerLinkActive="router-link-active"
-          >EMPRESAS</a
-        >
-      </li>
-      <li>
-        <a
-          [routerLink]="['/funcionarios']"
-          routerLinkActive="router-link-active"
-          >FUNCIONÁRIOS</a
-        >
-      </li>
-    </ul>
+    Sistema Desafio Basis
   </nav>
-</header> -->
-<p-sidebar [(visible)]="display">
+</header>
+<p-sidebar [(visible)]="display" [style]="{ heigth: '70%' }">
   <a [routerLink]="['']">
-    <img src="../../assets//logo.png" alt="" srcset="" />
+    <img src="../../assets/logo.png" alt="" srcset="" />
   </a>
 
   <div class="menu">
@@ -37,15 +27,6 @@
   </div>
 </p-sidebar>
 
-<button
-  type="text"
-  (click)="display = true"
-  pButton
-  icon="pi pi-microsoft"
-  label="Show"
->
-  Menu ❯
-</button>
 <div>
   <router-outlet></router-outlet>
 </div>
