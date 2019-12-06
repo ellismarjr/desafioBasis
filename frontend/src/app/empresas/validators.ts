@@ -1,6 +1,6 @@
 import { ToastrService } from "ngx-toastr";
 
-export class myValidators {
+export class MyValidators {
   constructor(private toastr: ToastrService) {}
 
   nome = 200;

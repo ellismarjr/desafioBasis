@@ -7,7 +7,7 @@ import { Location } from "@angular/common";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { Empresa } from "../empresa";
 import { Funcionario } from "src/app/funcionarios/funcionarios";
-import { myValidators } from "../validators";
+import { MyValidators } from "../validators";
 
 @Component({
   selector: "app-empresa-detalhe",
@@ -36,7 +36,8 @@ export class EmpresaDetalheComponent implements OnInit {
     /\d/
   ];
 
-  validators: myValidators = new myValidators(this.toastr);
+  // Classe para validação dos campos ao cadastrar ou editar uma empresa
+  validators: MyValidators = new MyValidators(this.toastr);
 
   form: FormGroup;
   empresas: Empresa[];
@@ -72,18 +73,24 @@ export class EmpresaDetalheComponent implements OnInit {
       cnpj: [empresa.cnpj, [Validators.required, Validators.maxLength(18)]]
     });
 
+    // Carrega os dados da empresa
     this.getEmpresa(empresa.id);
-    this.funcionarios = this.empresaSelecionada["funcionarios"];
   }
 
   hasError(field: string) {
     return this.form.get(field).errors;
   }
 
+  /**
+   * Método para salvar em caso de criação ou editação de empresas
+   */
   onSubmit() {
     this.submitted = true;
 
     if (this.form.valid) {
+      /**
+       * Validação dos campos na criação e/ou edição de empresas
+       */
       this.validators.validNome(this.form.value.nome);
       this.validators.validEndereco(this.form.value.endereco);
       this.validators.validCnpj(this.form.value.cnpj);
@@ -91,17 +98,26 @@ export class EmpresaDetalheComponent implements OnInit {
       let msgSuccess = "Empresa cadastrada com sucesso!";
       let msgError = "Erro ao cadastrar empresa. Verifique seus dados!";
 
+      /**
+       * Checagem para verificar se existe o id,
+       * se existe é porque é uma edição de uma empresa
+       * senão é uma criação de uma empresa
+       */
       if (this.form.value.id) {
         msgSuccess = "Empresa atualizada com sucesso!";
         msgError = "Erro ao atualizar empresa. Verifique seus dados!";
       }
 
+      /**
+       * Checagem se todas as métricas de validação foram atendidas
+       * na classe MyValidators
+       */
       if (this.validators.validations) {
         this.empresaService.save(this.form.value).subscribe(
           empresa => {
             this.editarModalRef.hide();
-            this.empresaSelecionada = empresa;
-            this.toastr.success(msgSuccess);
+            this.empresaSelecionada = empresa; // Atualiza os dados da empresa selecionada no objeto
+            this.toastr.success(msgSuccess); // Mostra uma mensagem de sucesso
           },
           error => {
             this.onCancel();
@@ -116,6 +132,9 @@ export class EmpresaDetalheComponent implements OnInit {
     }
   }
 
+  /**
+   * Método para excluir a empresa
+   */
   onConfirmDelete() {
     this.empresaService.delete(this.empresaSelecionada.id).subscribe(
       success => {
@@ -132,31 +151,42 @@ export class EmpresaDetalheComponent implements OnInit {
     );
   }
 
+  /**
+   * Busca todos os dados da empresa
+   */
   getEmpresa(id) {
     this.empresaService.findById(id).subscribe(empresa => {
       this.empresaSelecionada = empresa;
     });
   }
 
-  onUpdate(id) {
-    this.router.navigate(["detalhes", id], { relativeTo: this.route });
-  }
-
+  /**
+   * Mostra o modal para exclusão da empresa
+   */
   onDelete(empresa) {
     this.empresaSelecionada = empresa;
     this.excluirModalRef = this.bsModalService.show(this.excluirModal);
   }
 
+  /**
+   * Método para resetar o form
+   */
   onCancel() {
     this.submitted = false;
     this.form.reset();
-    this.router.navigate(["empresas"]);
   }
 
+  /**
+   * Mostra modal para edição da empresa
+   */
   openModal(template: TemplateRef<any>) {
     this.editarModalRef = this.bsModalService.show(template);
   }
 
+  /**
+   *
+   * Mostra o modal de exluir
+   */
   openModalExcluir(template: TemplateRef<any>) {
     this.excluirModalRef = this.bsModalService.show(template);
   }
@@ -165,6 +195,9 @@ export class EmpresaDetalheComponent implements OnInit {
     this.location.back();
   }
 
+  /**
+   * Método para mostrar os funcionários ao usuário clicar no botão de Funcionários
+   */
   showFuncionarios() {
     this.funcionarios = this.empresaSelecionada["funcionarios"];
 
@@ -177,6 +210,9 @@ export class EmpresaDetalheComponent implements OnInit {
     }
   }
 
+  /**
+   * Método para ir para o funcionário ao usuário clicar em cima do funcionário
+   */
   goToFuncionario(id) {
     this.router.navigate(["funcionarios/detalhes", id]);
   }

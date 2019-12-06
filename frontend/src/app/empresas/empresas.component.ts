@@ -6,7 +6,7 @@ import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { ToastrService } from "ngx-toastr";
 import { empty, Observable, Subject } from "rxjs";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { myValidators } from "./validators";
+import { MyValidators } from "./validators";
 
 @Component({
   selector: "app-empresas",
@@ -36,7 +36,8 @@ export class EmpresasComponent implements OnInit {
     /\d/
   ];
 
-  validators: myValidators = new myValidators(this.toastr);
+  // Classe para validação dos campos ao cadastrar ou editar uma empresa
+  validators: MyValidators = new MyValidators(this.toastr);
 
   empresas: Empresa[];
   error$ = new Subject<boolean>();
@@ -60,6 +61,7 @@ export class EmpresasComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Carrega as empresas ao iniciar a página, trazendo o id e o nome das empresas
     this.find();
 
     const empresa = this.route.snapshot.data["empresa"];
@@ -81,6 +83,7 @@ export class EmpresasComponent implements OnInit {
     });
   }
 
+  // Método para carregar as empresas
   find() {
     this.empresaService.find().subscribe(
       res => {
@@ -99,10 +102,16 @@ export class EmpresasComponent implements OnInit {
     );
   }
 
+  /**
+   * Método para salvar em caso de criação ou editação de empresas
+   */
   onSubmit() {
     this.submitted = true;
 
     if (this.form.valid) {
+      /**
+       * Validação dos campos na criação e/ou edição de empresas
+       */
       this.validators.validNome(this.form.value.nome);
       this.validators.validEndereco(this.form.value.endereco);
       this.validators.validCnpj(this.form.value.cnpj);
@@ -110,21 +119,30 @@ export class EmpresasComponent implements OnInit {
       let msgSuccess = "Empresa cadastrada com sucesso!";
       let msgError = "Erro ao cadastrar empresa. Verifique seus dados!";
 
+      /**
+       * Checagem para verificar se existe o id,
+       * se existe é porque é uma edição de uma empresa
+       * senão é uma criação de uma empresa
+       */
       if (this.form.value.id) {
         msgSuccess = "Empresa atualizada com sucesso!";
         msgError = "Erro ao atualizar empresa. Verifique seus dados!";
       }
 
+      /**
+       * Checagem se todas as métricas de validação foram atendidas
+       * na classe MyValidators
+       */
       if (this.validators.validations) {
         this.empresaService.save(this.form.value).subscribe(
           empresa => {
-            this.toastr.success(msgSuccess);
-            this.empresas.push(empresa);
-            this.cadModalRef.hide();
+            this.toastr.success(msgSuccess); // Mostra uma mensagem de sucesso
+            this.empresas.push(empresa); // Adiciona a empresa criada no array empresas[]
+            this.cadModalRef.hide(); // Esconde o modal de criação de um empresa
           },
           error => {
-            this.toastr.error(msgError);
-            this.cadModalRef.hide();
+            this.toastr.error(msgError); // Mostra uma mensagem de erro ao cadastrar uma empresa
+            this.cadModalRef.hide(); // Esconde o modal de criação de uma empresa
           }
         );
       }
@@ -135,51 +153,16 @@ export class EmpresasComponent implements OnInit {
     }
   }
 
+  /**
+   * Pega o id da empresa e leva o usuário para tela de detalhe
+   * mostrando os restantes de informações da empresa
+   */
   onUpdate(id) {
     this.router.navigate(["detalhes", id], { relativeTo: this.route });
   }
 
-  onDelete(empresa) {
-    this.empresaSelecionada = empresa;
-    this.deleteModalRef = this.bsModalService.show(this.deleteModal, {
-      class: "modal-sm"
-    });
-  }
-
-  onConfirmDelete() {
-    this.empresaService.delete(this.empresaSelecionada.id).subscribe(
-      success => {
-        window.location.reload();
-        this.deleteModalRef.hide();
-        this.toastr.success("Empresa excluída com sucesso!");
-        this.form.reset();
-      },
-      error => {
-        this.toastr.error(
-          "Erro ao tentar excluir empresa. Tente novamente mais tarde!"
-        );
-        this.deleteModalRef.hide();
-      }
-    );
-  }
-
-  onDeclineDelete() {
-    this.deleteModalRef.hide();
-  }
-
-  handleError() {
-    this.toastr.error("Erro ao carregar empresas. Tente novamente mais tarde!");
-  }
-
+  // Abri o modal para cadastrar empresa
   openModal(template: TemplateRef<any>) {
     this.cadModalRef = this.bsModalService.show(template);
-  }
-
-  openModalEditar(template: TemplateRef<any>) {
-    this.editarModalRef = this.bsModalService.show(template);
-  }
-
-  hasError(field: string) {
-    return this.form.get(field).errors;
   }
 }
